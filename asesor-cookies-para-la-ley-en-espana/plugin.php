@@ -7,7 +7,7 @@ Description: Este plugin avisa a los nuevos visitantes de su web sobre la utiliz
 Tags: rgpd, cookie, cookies, spain, ley, law, politica, policy, españa, normativa
 Version: 0.34
 Requires at least: 3.5
-Tested up to: 6.5.4
+Tested up to: 6.8.3
 Author: Carlos Doral Pérez
 Author URI: https://webartesanal.com
 License: GPLv2 or later

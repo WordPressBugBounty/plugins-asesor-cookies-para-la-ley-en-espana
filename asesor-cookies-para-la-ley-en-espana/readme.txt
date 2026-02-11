@@ -2,7 +2,7 @@
 Contributors: Carlos Doral Pérez (<a href="https://webartesanal.com">webartesanal.com</a>)
 Tags: rgpd, cookie, cookies, spain, ley, law, politica, policy, españa, normativa
 Requires at least: 3.5
-Tested up to: 6.5.4
+Tested up to: 6.8.3
 Stable tag: 0.34
 License: GPLv2 or later
 
