@@ -4,7 +4,7 @@ Tags: rgpd, cookie, cookies, spain, ley, law, politica, policy, españa, normati
 Requires at least: 3.5
 Requires PHP: 7.2
 Tested up to: 7.0
-Stable tag: 1.0.41
+Stable tag: 1.0.42
 License: GPLv2 or later
 
 Este plugin ayuda a gestionar el consentimiento de cookies en WordPress mediante banner, inventario de cookies, carga condicionada de scripts y protección de contenidos embebidos.
@@ -88,6 +88,9 @@ Permite que un administrador navegue por la web mientras el plugin registra cook
 El plugin utiliza categorías fijas: necesarias, analíticas, marketing y personalización. En los shortcodes se usan los valores técnicos necessary, analytics, marketing y personalization.
 
 == Changelog ==
+
+= 1.0.42 =
+* Evita que el banner de cookies se renderice dentro del administrador, REST, AJAX o editores de widgets/bloques.
 
 = 1.0.41 =
 * Ajustes de textos del encabezado del administrador y contador de cookies traducido.

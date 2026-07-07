@@ -574,6 +574,10 @@ class cdp_cookies {
 	}
 
 	public static function cargar_archivos_front() {
+		if ( ! self::should_render_front_ui() ) {
+			return;
+		}
+
 		wp_enqueue_style( 'cdp-cookies-front', CDP_COOKIES_URL_HTML . 'front/estilos.css', array(), CDP_COOKIES_VERSION );
 		wp_enqueue_script( 'cdp-cookies-front', CDP_COOKIES_URL_HTML . 'front/principal.js', array(), CDP_COOKIES_VERSION, true );
 
@@ -810,6 +814,18 @@ class cdp_cookies {
 			),
 			false
 		);
+	}
+
+	private static function should_render_front_ui() {
+		if ( is_admin() || wp_doing_ajax() || ( function_exists( 'wp_is_json_request' ) && wp_is_json_request() ) ) {
+			return false;
+		}
+
+		if ( defined( 'REST_REQUEST' ) && REST_REQUEST ) {
+			return false;
+		}
+
+		return true;
 	}
 
 	private static function handle_stop_audit_recording() {
@@ -1654,6 +1670,10 @@ class cdp_cookies {
 	}
 
 	public static function renderizar_aviso() {
+		if ( ! self::should_render_front_ui() ) {
+			return;
+		}
+
 		$text = self::get_banner_text();
 		$preferences_button = self::get_preferences_button_settings();
 
