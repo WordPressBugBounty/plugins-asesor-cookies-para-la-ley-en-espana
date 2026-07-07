@@ -1,319 +1,263 @@
-/*============================================
-  General
-  ============================================*/
-.cdp-cookies-alerta {
-	
-}
-.cdp-cookies-alerta .cdp-cookies-solapa {
-	display: block;
+.cdp-cookies-banner {
 	position: fixed;
-	z-index: 100002;
-	width: 120px;
-	text-align: center;
-	font-size:12px;
-	line-height: 18px;
-	padding: 5px 0;
-	font-family: Helvetica, Arial, sans-serif;
-	cursor: pointer;
-  -webkit-border-top-left-radius: 5px;
-  -moz-border-radius-topleft: 5px;
-  border-top-left-radius: 5px;
-  -webkit-border-top-right-radius: 5px;
-  -moz-border-radius-topright: 5px;
-  border-top-right-radius: 5px;
-}
-.cdp-cookies-alerta.cdp-solapa-der .cdp-cookies-solapa {
-	right:0;
-}
-.cdp-cookies-alerta.cdp-solapa-izq .cdp-cookies-solapa {
-	left:0;
-}
-.cdp-cookies-alerta.cdp-solapa-ocultar .cdp-cookies-solapa {
-	display:none;
-}
-.cdp-cookies-alerta .cdp-cookies-texto {
-	position: fixed;
-	left:0; 
-	width:100%;
+	right: 18px;
+	bottom: 18px;
+	left: 18px;
 	z-index: 100001;
-	padding: 5px 10px 5px 10px;
-	font-size: 12px;
-	font-weight: normal;
-	line-height: 14px;
+	max-width: 980px;
+	margin: 0 auto;
+	padding: 18px;
+	border: 1px solid #d0d7de;
+	border-radius: 8px;
+	background: #fff;
+	color: #1f2937;
+	box-shadow: 0 16px 40px rgba(15, 23, 42, .18);
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
-.cdp-cookies-alerta .cdp-cookies-texto h4 {
-	text-align: center;
-	font-family: Helvetica, Arial, sans-serif;
+
+.cdp-cookies-banner[hidden],
+.cdp-cookies-panel[hidden],
+.cdp-cookies-preferences[hidden] {
+	display: none !important;
+}
+
+.cdp-cookies-banner__body {
+	display: grid;
+	grid-template-columns: minmax(0, 1fr) auto;
+	gap: 18px;
+	align-items: center;
+}
+
+.cdp-cookies-banner__text {
 	font-size: 14px;
-	font-weight: normal;
-	line-height: 16px;
-	color:#ffffff;
-	padding: 0 0 5px 0;
-	margin: 0;
-	text-rendering: optimizeLegibility;
+	line-height: 1.5;
 }
-.cdp-cookies-alerta .cdp-cookies-texto p {
-	padding: 5px 0;
+
+.cdp-cookies-banner__text p {
 	margin: 0;
-	text-align: center;
-	color:#bbbbbb;
-	font-family: Helvetica, Arial, sans-serif;
-	font-size: 12px;
-	font-weight: normal;
-	line-height: 14px;
-	text-rendering: optimizeLegibility;
 }
-.cdp-cookies-alerta .cdp-cookies-texto a {
-	font-family: Helvetica, Arial, sans-serif;
-	font-size: 12px;
-	line-height: 14px;
-	font-weight: normal;
-	color: #ff8888;
-	text-decoration: none;
+
+.cdp-cookies-banner__text a {
+	color: #1d4ed8;
+	text-decoration: underline;
+}
+
+.cdp-cookies-banner__actions,
+.cdp-cookies-panel__actions {
+	display: flex;
+	gap: 8px;
+	flex-wrap: wrap;
+	justify-content: flex-end;
+}
+
+.cdp-cookies-button {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	min-height: 36px;
+	padding: 8px 12px;
+	border: 1px solid #d0d7de;
+	border-radius: 6px;
+	background: #fff;
+	color: #1f2937;
+	font: inherit;
+	font-size: 14px;
+	font-weight: 600;
+	line-height: 1.2;
+	cursor: pointer;
+}
+
+.cdp-cookies-button:hover,
+.cdp-cookies-button:focus {
+	border-color: #93c5fd;
+	color: #1d4ed8;
+}
+
+.cdp-cookies-button--primary {
+	border-color: #1d4ed8;
+	background: #1d4ed8;
+	color: #fff;
+}
+
+.cdp-cookies-button--primary:hover,
+.cdp-cookies-button--primary:focus {
+	border-color: #1e40af;
+	background: #1e40af;
+	color: #fff;
+}
+
+.cdp-cookies-button--link {
+	min-height: auto;
+	padding: 0;
 	border: 0;
-	text-rendering: optimizeLegibility;
+	background: transparent;
+	color: #1d4ed8;
 }
-.cdp-cookies-alerta .cdp-cookies-texto a:hover, 
-.cdp-cookies-alerta .cdp-cookies-texto a:active, 
-.cdp-cookies-alerta .cdp-cookies-texto a:visited {
-	color: #ffcccc;
+
+.cdp-cookies-panel {
+	margin-top: 16px;
+	padding-top: 16px;
+	border-top: 1px solid #e5e7eb;
 }
-.cdp-cookies-boton-cerrar {
-	font-size:11px !important;
-	line-height: 20px;
+
+.cdp-cookies-panel__header {
+	display: flex;
+	justify-content: space-between;
+	gap: 12px;
+	margin-bottom: 12px;
+}
+
+.cdp-cookies-option {
+	padding: 12px 0;
+	border-top: 1px solid #f1f5f9;
+}
+
+.cdp-cookies-option label {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	font-weight: 700;
+}
+
+.cdp-cookies-option p {
+	margin: 6px 0 0 26px;
+	color: #4b5563;
+	font-size: 13px;
+	line-height: 1.45;
+}
+
+.cdp-cookies-preferences {
+	position: fixed;
+	left: var(--cdp-pref-x-desktop, 95%);
+	right: auto;
+	bottom: 16px;
+	z-index: 100000;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	min-height: 34px;
+	padding: 7px 10px;
+	border: 1px solid #d0d7de;
+	border-radius: 6px;
+	background: #fff;
+	color: #1f2937;
+	box-shadow: 0 8px 24px rgba(15, 23, 42, .14);
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+	font-size: 13px;
+	font-weight: 700;
+	cursor: pointer;
+	transform: translateX(-50%);
+}
+
+.cdp-cookies-preferences--icon {
+	width: 44px;
+	height: 44px;
+	min-height: 44px;
+	padding: 0;
+	border-radius: 999px;
+}
+
+.cdp-cookies-cookie-icon,
+.cdp-cookies-cookie-icon svg {
 	display: block;
-	width: 75px;
-	padding: 2px 10px 0 10px;
-	margin:0 auto;
-	text-align: center;
-  -webkit-border-radius: 3px;
-  -moz-border-radius: 3px;
-  border-radius: 3px;
+	width: 22px;
+	height: 22px;
 }
 
-/*============================================
-  Animaciones
-  ============================================*/
-@keyframes animacion_abajo {
-	0% {bottom:0px;}
-	100% {bottom:-200px;}
-}
-@keyframes animacion_arriba {
-	0% {bottom:-200px;}
-	100% {bottom:0px;}
-}
-.cdp-animacion-abajo {
-	animation: animacion_abajo 0.5s forwards;
-    -webkit-animation: animacion_abajo 0.5s forwards;
-}
-.cdp-animacion-arriba {
-	animation: animacion_arriba 0.5s forwards;
-    -webkit-animation: animacion_arriba 0.5s forwards;
-}
-.cdp-mostrar {
-	bottom: 0;
-}
-.cdp-ocultar { 
-	bottom: -200px;
+.cdp-cookies-preferences--right {
+	top: var(--cdp-pref-side-y, 60%);
+	right: 16px;
+	bottom: auto;
+	left: auto;
+	transform: translateY(-50%);
 }
 
-/*============================================
-  Alineación
-  ============================================*/
-.cdp-cookies-alerta.cdp-cookies-textos-izq .cdp-cookies-texto h4,
-.cdp-cookies-alerta.cdp-cookies-textos-izq .cdp-cookies-texto p {
+.cdp-cookies-preferences--left {
+	top: var(--cdp-pref-side-y, 60%);
+	right: auto;
+	bottom: auto;
+	left: 16px;
+	transform: translateY(-50%);
+}
+
+.cdp-cookies-policy-table {
+	width: 100%;
+	border-collapse: collapse;
+	margin: 18px 0;
+	font-size: 14px;
+}
+
+.cdp-cookies-policy-table th,
+.cdp-cookies-policy-table td {
+	padding: 10px;
+	border: 1px solid #d0d7de;
 	text-align: left;
+	vertical-align: top;
 }
 
-/*============================================
-  Color gris
-  ============================================*/
-.cdp-cookies-alerta.cdp-cookies-tema-gris .cdp-cookies-texto {
-	background-color: #444444;
-	color:#fff;
-	border-top:1px solid #222222;
-	border-bottom:1px solid #222222;
-}
-.cdp-cookies-alerta.cdp-cookies-tema-gris .cdp-cookies-texto h4 {
-	color: #ffffff;
-}
-.cdp-cookies-alerta.cdp-cookies-tema-gris .cdp-cookies-texto p {
-	color: #bbbbbb;
-}
-.cdp-cookies-alerta.cdp-cookies-tema-gris .cdp-cookies-texto a {
-	color: #ff8888 !important;
-}
-.cdp-cookies-alerta.cdp-cookies-tema-gris .cdp-cookies-texto a:hover,
-.cdp-cookies-alerta.cdp-cookies-tema-gris .cdp-cookies-texto a:active,
-.cdp-cookies-alerta.cdp-cookies-tema-gris .cdp-cookies-texto a:visited {
-	color: #ffcccc !important;
-}
-.cdp-cookies-alerta.cdp-cookies-tema-gris .cdp-cookies-solapa {
-	background-color: #333;
-	color: #ddd;
-}
-.cdp-cookies-alerta.cdp-cookies-tema-gris .cdp-cookies-solapa:hover {
-	background-color: #666;
-}
-.cdp-cookies-alerta.cdp-cookies-tema-gris .cdp-cookies-boton-cerrar {
-	background-color: #000;
-}
-.cdp-cookies-alerta.cdp-cookies-tema-gris .cdp-cookies-boton-cerrar:hover {
-	background-color: #666;
+.cdp-cookies-policy-table th {
+	background: #f8fafc;
+	font-weight: 700;
 }
 
-/*============================================
-  Color blanco
-  ============================================*/
-.cdp-cookies-alerta.cdp-cookies-tema-blanco .cdp-cookies-texto {
-	background-color: #ffffff;
-	border-top:1px solid #dddddd;
-	border-bottom:1px solid #dddddd;
-}
-.cdp-cookies-alerta.cdp-cookies-tema-blanco .cdp-cookies-texto h4 {
-	color: #666666;
-}
-.cdp-cookies-alerta.cdp-cookies-tema-blanco .cdp-cookies-texto p {
-	color: #888888;
-}
-.cdp-cookies-alerta.cdp-cookies-tema-blanco .cdp-cookies-texto a {
-	color: #cc8888;
-}
-.cdp-cookies-alerta.cdp-cookies-tema-blanco .cdp-cookies-texto a:hover,
-.cdp-cookies-alerta.cdp-cookies-tema-blanco .cdp-cookies-texto a:active,
-.cdp-cookies-alerta.cdp-cookies-tema-blanco .cdp-cookies-texto a:visited {
-	color: #eeaaaa;
-}
-.cdp-cookies-alerta.cdp-cookies-tema-blanco .cdp-cookies-solapa {
-	background-color: #fff;
-	color: #333;
-}
-.cdp-cookies-alerta.cdp-cookies-tema-blanco .cdp-cookies-solapa:hover {
-	background-color: #ddd;
-}
-.cdp-cookies-alerta.cdp-cookies-tema-blanco .cdp-cookies-boton-cerrar {
-	background-color: #aaa;
-	color: #000 !important;
-}
-.cdp-cookies-alerta.cdp-cookies-tema-blanco .cdp-cookies-boton-cerrar:hover {
-	background-color: #ddd;
+.cdp-cookies-protected-embed {
+	margin: 18px 0;
 }
 
-/*============================================
-  Color rojo
-  ============================================*/
-.cdp-cookies-alerta.cdp-cookies-tema-rojo .cdp-cookies-texto {
-	background-color: #e04729;
-	border-top:1px solid #99301b;
-	border-bottom:1px solid #99301b;
-}
-.cdp-cookies-alerta.cdp-cookies-tema-rojo .cdp-cookies-texto h4 {
-	color: #ffffff;
-}
-.cdp-cookies-alerta.cdp-cookies-tema-rojo .cdp-cookies-texto p {
-	color: #dddddd;
-}
-.cdp-cookies-alerta.cdp-cookies-tema-rojo .cdp-cookies-texto a {
-	color: #febebe;
-}
-.cdp-cookies-alerta.cdp-cookies-tema-rojo .cdp-cookies-texto a:hover,
-.cdp-cookies-alerta.cdp-cookies-tema-rojo .cdp-cookies-texto a:active,
-.cdp-cookies-alerta.cdp-cookies-tema-rojo .cdp-cookies-texto a:visited {
-	color: #ffffff;
-}
-.cdp-cookies-alerta.cdp-cookies-tema-rojo .cdp-cookies-solapa {
-	background-color: #e04729;
-	color: #fff;
-}
-.cdp-cookies-alerta.cdp-cookies-tema-rojo .cdp-cookies-solapa:hover {
-	background-color: #a5321c;
-}
-.cdp-cookies-alerta.cdp-cookies-tema-rojo .cdp-cookies-boton-cerrar {
-	background-color: #a5321c;
-}
-.cdp-cookies-alerta.cdp-cookies-tema-rojo .cdp-cookies-boton-cerrar:hover {
-	background-color: #85120c;
+.cdp-cookies-protected-embed__placeholder {
+	display: grid;
+	gap: 10px;
+	place-items: center;
+	min-height: 180px;
+	padding: 24px;
+	border: 1px solid #d0d7de;
+	border-radius: 8px;
+	background: #f8fafc;
+	color: #1f2937;
+	text-align: center;
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 
-/*============================================
-  Color azul
-  ============================================*/
-.cdp-cookies-alerta.cdp-cookies-tema-azul .cdp-cookies-texto {
-	background-color: #5492e0;
-	border-top:1px solid #3f6da7;
-	border-bottom:1px solid #3f6da7;
-}
-.cdp-cookies-alerta.cdp-cookies-tema-azul .cdp-cookies-texto h4 {
-	color: #ffffff;
-}
-.cdp-cookies-alerta.cdp-cookies-tema-azul .cdp-cookies-texto p {
-	color: #eeeeee;
-}
-.cdp-cookies-alerta.cdp-cookies-tema-azul .cdp-cookies-texto a {
-	color: #b7d7ff;
-}
-.cdp-cookies-alerta.cdp-cookies-tema-azul .cdp-cookies-texto a:hover,
-.cdp-cookies-alerta.cdp-cookies-tema-azul .cdp-cookies-texto a:active,
-.cdp-cookies-alerta.cdp-cookies-tema-azul .cdp-cookies-texto a:visited {
-	color: #dcebff;
-}
-.cdp-cookies-alerta.cdp-cookies-tema-azul .cdp-cookies-solapa {
-	background-color: #5492e0;
-	color: #fff;
-}
-.cdp-cookies-alerta.cdp-cookies-tema-azul .cdp-cookies-solapa:hover {
-	background-color: #3472c0;
-}
-.cdp-cookies-alerta.cdp-cookies-tema-azul .cdp-cookies-boton-cerrar {
-	background-color: #2462b0;
-}
-.cdp-cookies-alerta.cdp-cookies-tema-azul .cdp-cookies-boton-cerrar:hover {
-	background-color: #64a2f0;
+.cdp-cookies-protected-embed__placeholder[hidden] {
+	display: none !important;
 }
 
-/*============================================
-  Color verde
-  ============================================*/
-.cdp-cookies-alerta.cdp-cookies-tema-verde .cdp-cookies-texto {
-	background-color: #0b7000;
-	border-top:1px solid #064000;
-	border-bottom:1px solid #064000;
-}
-.cdp-cookies-alerta.cdp-cookies-tema-verde .cdp-cookies-texto h4 {
-	color: #ffffff;
-}
-.cdp-cookies-alerta.cdp-cookies-tema-verde .cdp-cookies-texto p {
-	color: #dddddd;
-}
-.cdp-cookies-alerta.cdp-cookies-tema-verde .cdp-cookies-texto a {
-	color: #75c76c;
-}
-.cdp-cookies-alerta.cdp-cookies-tema-verde .cdp-cookies-texto a:hover,
-.cdp-cookies-alerta.cdp-cookies-tema-verde .cdp-cookies-texto a:active,
-.cdp-cookies-alerta.cdp-cookies-tema-verde .cdp-cookies-texto a:visited {
-	color: #c4ffbe;
-}
-.cdp-cookies-alerta.cdp-cookies-tema-verde .cdp-cookies-solapa {
-	background-color: #0b7000;
-	color: #fff;
-}
-.cdp-cookies-alerta.cdp-cookies-tema-verde .cdp-cookies-solapa:hover {
-	background-color: #095000;
-}
-.cdp-cookies-alerta.cdp-cookies-tema-verde .cdp-cookies-boton-cerrar {
-	background-color: #074000;
-	color: #fff !important;
-}
-.cdp-cookies-alerta.cdp-cookies-tema-verde .cdp-cookies-boton-cerrar:hover {
-	background-color: #2b9010;
+.cdp-cookies-protected-embed__placeholder p {
+	max-width: 560px;
+	margin: 0;
+	color: #4b5563;
+	font-size: 14px;
+	line-height: 1.5;
 }
 
-/*============================================
-  boton créditos
-  ============================================*/
-.cdp-cookies-boton-creditos {
-	font-size: 12px;
-	float:right;
-	padding: 10px 0;
+@media (max-width: 760px) {
+	.cdp-cookies-banner {
+		right: 10px;
+		bottom: 10px;
+		left: 10px;
+		padding: 14px;
+	}
+
+	.cdp-cookies-banner__body {
+		grid-template-columns: 1fr;
+	}
+
+	.cdp-cookies-banner__actions,
+	.cdp-cookies-panel__actions {
+		justify-content: stretch;
+	}
+
+	.cdp-cookies-button {
+		flex: 1 1 auto;
+	}
+
+	.cdp-cookies-preferences--bottom {
+		left: var(--cdp-pref-x-mobile, 85%);
+	}
 }
 
+@media (min-width: 761px) and (max-width: 1024px) {
+	.cdp-cookies-preferences--bottom {
+		left: var(--cdp-pref-x-tablet, 90%);
+	}
+}

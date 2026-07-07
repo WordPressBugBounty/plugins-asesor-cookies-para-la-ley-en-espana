@@ -1,207 +1,393 @@
-/*!
- * jQuery Cookie Plugin v1.3.1
- * https://github.com/carhartl/jquery-cookie
- *
- * Copyright 2013 Klaus Hartl
- * Released under the MIT license
- */
- 
-(function (factory) {
-   if (typeof define === 'function' && define.amd) {
-      // AMD. Register as anonymous module.
-      define(['jquery'], factory);
-   } else {
-      // Browser globals.
-      factory(jQuery);
-   }
-}(function ($) {
+(function() {
+	'use strict';
 
-   var pluses = /\+/g;
+	var config = window.cdpCookiesConfig || {};
+	var cookieName = config.cookieName || 'cdp_cookie_consent';
+	var maxAge = parseInt(config.maxAge || 31536000, 10);
+	var scriptRuns = {};
 
-   function decode(s) {
-      if (config.raw) {
-         return s;
-      }
-      try {
-         // If we can't decode the cookie, ignore it, it's unusable.
-         return decodeURIComponent(s.replace(pluses, ' '));
-      } catch(e) {}
-   }
+	function readConsent() {
+		var cookies = document.cookie ? document.cookie.split('; ') : [];
 
-   function decodeAndParse(s) {
-      if (s.indexOf('"') === 0) {
-         // This is a quoted cookie as according to RFC2068, unescape...
-         s = s.slice(1, -1).replace(/\\"/g, '"').replace(/\\\\/g, '\\');
-      }
+		for (var i = 0; i < cookies.length; i++) {
+			var parts = cookies[i].split('=');
+			var name = decodeURIComponent(parts.shift());
 
-      s = decode(s);
+			if (name !== cookieName) {
+				continue;
+			}
 
-      try {
-         // If we can't parse the cookie, ignore it, it's unusable.
-         return config.json ? JSON.parse(s) : s;
-      } catch(e) {}
-   }
+			try {
+				return JSON.parse(decodeURIComponent(parts.join('=')));
+			} catch (error) {
+				return null;
+			}
+		}
 
-   var config = $.cookie = function (key, value, options) {
+		return null;
+	}
 
-      // Write
-      if (value !== undefined) {
-         options = $.extend({}, config.defaults, options);
+	function writeConsent(consent) {
+		consent.updatedAt = new Date().toISOString();
+		document.cookie = encodeURIComponent(cookieName) + '=' + encodeURIComponent(JSON.stringify(consent)) + '; max-age=' + maxAge + '; path=/; SameSite=Lax';
+	}
 
-         if (typeof options.expires === 'number') {
-            var days = options.expires, t = options.expires = new Date();
-            t.setDate(t.getDate() + days);
-         }
+	function buildConsent(accepted) {
+		var consent = {
+			necessary: true,
+			analytics: !!accepted,
+			marketing: !!accepted,
+			personalization: !!accepted
+		};
 
-         value = config.json ? JSON.stringify(value) : String(value);
+		return consent;
+	}
 
-         return (document.cookie = [
-            config.raw ? key : encodeURIComponent(key),
-            '=',
-            config.raw ? value : encodeURIComponent(value),
-            options.expires ? '; expires=' + options.expires.toUTCString() : '', // use expires attribute, max-age is not supported by IE
-            options.path    ? '; path=' + options.path : '',
-            options.domain  ? '; domain=' + options.domain : '',
-            options.secure  ? '; secure' : ''
-         ].join(''));
-      }
+	function syncPanel(consent) {
+		var current = consent || readConsent() || buildConsent(false);
 
-      // Read
+		document.querySelectorAll('[data-cdp-cookies-category]').forEach(function(input) {
+			var category = input.getAttribute('data-cdp-cookies-category');
 
-      var result = key ? undefined : {};
+			if (!category || category === 'necessary') {
+				input.checked = true;
+				return;
+			}
 
-      // To prevent the for loop in the first place assign an empty array
-      // in case there are no cookies at all. Also prevents odd result when
-      // calling $.cookie().
-      var cookies = document.cookie ? document.cookie.split('; ') : [];
+			input.checked = !!current[category];
+		});
+	}
 
-      for (var i = 0, l = cookies.length; i < l; i++) {
-         var parts = cookies[i].split('=');
-         var name = decode(parts.shift());
-         var cookie = parts.join('=');
+	function executeScripts(consent) {
+		var scripts = config.scripts || {};
 
-         if (key && key === name) {
-            result = decodeAndParse(cookie);
-            break;
-         }
+		Object.keys(scripts).forEach(function(category) {
+			if (!consent[category] || !scripts[category] || scriptRuns[category]) {
+				return;
+			}
 
-         // Prevent storing a cookie that we couldn't decode.
-         if (!key && (cookie = decodeAndParse(cookie)) !== undefined) {
-            result[name] = cookie;
-         }
-      }
+			scriptRuns[category] = true;
+			executeHtml(scripts[category]);
+		});
 
-      return result;
-   };
+		applyProtectedEmbeds(consent);
+	}
 
-   config.defaults = {};
+	function executeHtml(html) {
+		var template = document.createElement('template');
+		template.innerHTML = html;
 
-   $.removeCookie = function (key, options) {
-      if ($.cookie(key) !== undefined) {
-         // Must not alter options, thus extending a fresh object...
-         $.cookie(key, '', $.extend({}, options, { expires: -1 }));
-         return true;
-      }
-      return false;
-   };
+		activateScripts(template.content);
 
-}));
+		document.body.appendChild(template.content);
+	}
 
-/* ======================================================================================
-   @author     Carlos Doral Pérez (http://webartesanal.com)
-   @version    0.19
-   @copyright  Copyright &copy; 2013-2014 Carlos Doral Pérez, All Rights Reserved
-               License: GPLv2 or later
-   ====================================================================================== */
+	function activateScripts(root) {
+		Array.prototype.slice.call(root.querySelectorAll('script')).forEach(function(oldScript) {
+			var newScript = document.createElement('script');
 
-//
-//
-//
-var cdp_cookie = {
+			Array.prototype.slice.call(oldScript.attributes).forEach(function(attribute) {
+				newScript.setAttribute(attribute.name, attribute.value);
+			});
 
-   // vars
-   _id_cookie: 'cdp-cookies-plugin-wp',
+			newScript.text = oldScript.text || oldScript.textContent || '';
+			oldScript.parentNode.replaceChild(newScript, oldScript);
+		});
+	}
 
-   //
-   // Compruebo si ya existe la cookie si es visitante nuevo.
-   //
-   // Modif: 08-ene-2014. Compruebo primero si existe la cookie antes del contenido de la misma
-   //
-   ya_existe_cookie: function _ya_existe_cookie() {
-      if( jQuery.cookie( cdp_cookie._id_cookie ) != null )
-         return jQuery.cookie( cdp_cookie._id_cookie ) == 'cdp';
-      return false;
-   },
+	function showBanner() {
+		var banner = document.querySelector('[data-cdp-cookies-banner]');
+		var preferences = document.querySelector('[data-cdp-cookies-open-preferences]');
 
-   // Guardo cookie
-   poner_cookie: function _poner_cookie() {
-      return jQuery.cookie( cdp_cookie._id_cookie, 'cdp', { expires: 365, path: '/' } );
-   },
+		if (banner) {
+			banner.hidden = false;
+		}
 
-   // Eliminar cookie
-   eliminar: function _eliminar() {
-      return jQuery.removeCookie( cdp_cookie._id_cookie );
-   },
+		if (preferences) {
+			preferences.hidden = true;
+		}
 
-   // Inicializacion
-   iniciar: function _iniciar() {
-      // Solapa
-      jQuery( '.cdp-cookies-solapa' ).click( function() {
-         cdp_cookie.mostrar_aviso();
-      } );
+		syncPanel(readConsent());
+	}
 
-      // Aceptar
-      jQuery( '.cdp-cookies-boton-cerrar' ).click( function() {
-         cdp_cookie.poner_cookie();
-         cdp_cookie.ocultar_aviso();
-      } );
-   },
+	function hideBanner() {
+		var banner = document.querySelector('[data-cdp-cookies-banner]');
+		var preferences = document.querySelector('[data-cdp-cookies-open-preferences]');
 
-   // Muestra aviso
-   mostrar_aviso: function _mostrar_aviso( de_golpe ) {
-      if( de_golpe )
-      {
-         jQuery( '.cdp-cookies-texto' ).attr( 'class', 'cdp-cookies-texto cdp-mostrar' );
-         jQuery( '.cdp-cookies-solapa' ).attr( 'class', 'cdp-cookies-solapa cdp-ocultar' );
-      }
-      else
-      {
-         jQuery( '.cdp-cookies-texto' ).attr( 'class', 'cdp-cookies-texto cdp-animacion-arriba' );
-         jQuery( '.cdp-cookies-solapa' ).attr( 'class', 'cdp-cookies-solapa cdp-animacion-abajo' );
-      }
-   },
+		if (banner) {
+			banner.hidden = true;
+		}
 
-   // Oculta aviso
-   ocultar_aviso: function _ocultar_aviso( de_golpe ) {
-      if( de_golpe )
-      {
-         jQuery( '.cdp-cookies-texto' ).attr( 'class', 'cdp-cookies-texto cdp-ocultar' );
-         jQuery( '.cdp-cookies-solapa' ).attr( 'class', 'cdp-cookies-solapa cdp-mostrar' );
-      }
-      else
-      {
-         jQuery( '.cdp-cookies-texto' ).attr( 'class', 'cdp-cookies-texto cdp-animacion-abajo' );
-         jQuery( '.cdp-cookies-solapa' ).attr( 'class', 'cdp-cookies-solapa cdp-animacion-arriba' );
-      }
-   },
+		if (preferences) {
+			preferences.hidden = false;
+		}
+	}
 
-   //
-   comportamiento: function _comportamiento() {
-      return cdp_cookies_info.comportamiento;
-   }
-};
- 
-//
-//
-//
-jQuery( document ).ready( function( $ )
-{
-   // Inicialización
-   cdp_cookie.iniciar();
+	function reloadPage() {
+		window.location.reload();
+	}
 
-   // Si ya hay cookie retorno
-   if( cdp_cookie.ya_existe_cookie() )
-      cdp_cookie.ocultar_aviso( true );
-   else
-      cdp_cookie.mostrar_aviso( true );
-} );
+	function openPanel() {
+		var panel = document.querySelector('[data-cdp-cookies-panel]');
+		syncPanel(readConsent());
+
+		if (panel) {
+			panel.hidden = false;
+		}
+	}
+
+	function closePanel() {
+		var panel = document.querySelector('[data-cdp-cookies-panel]');
+		if (panel) {
+			panel.hidden = true;
+		}
+	}
+
+	function saveCustomConsent() {
+		var consent = buildConsent(false);
+
+		document.querySelectorAll('[data-cdp-cookies-category]').forEach(function(input) {
+			consent[input.getAttribute('data-cdp-cookies-category')] = input.checked;
+		});
+
+		writeConsent(consent);
+		executeScripts(consent);
+		hideBanner();
+		syncPanel(consent);
+	}
+
+	function applyProtectedEmbeds(consent) {
+		document.querySelectorAll('[data-cdp-consent-embed]').forEach(function(wrapper) {
+			var category = wrapper.getAttribute('data-cdp-consent-category');
+
+			if (!category || !consent || !consent[category] || wrapper.getAttribute('data-cdp-consent-loaded') === '1') {
+				return;
+			}
+
+			var template = wrapper.querySelector('[data-cdp-consent-template]');
+			var placeholder = wrapper.querySelector('[data-cdp-consent-placeholder]');
+
+			if (!template) {
+				return;
+			}
+
+			var content = template.content.cloneNode(true);
+			activateScripts(content);
+
+			if (placeholder) {
+				placeholder.remove();
+			}
+
+			wrapper.appendChild(content);
+			wrapper.setAttribute('data-cdp-consent-loaded', '1');
+		});
+	}
+
+	function acceptEmbedCategory(category) {
+		var consent = readConsent() || buildConsent(false);
+		consent.necessary = true;
+		consent[category] = true;
+		writeConsent(consent);
+		executeScripts(consent);
+		hideBanner();
+	}
+
+	document.addEventListener('click', function(event) {
+		var embedButton = event.target.closest('[data-cdp-consent-embed-accept]');
+
+		if (embedButton) {
+			acceptEmbedCategory(embedButton.getAttribute('data-cdp-consent-embed-accept'));
+			return;
+		}
+
+		if (event.target.closest('[data-cdp-cookies-accept-all]')) {
+			var accepted = buildConsent(true);
+			writeConsent(accepted);
+			executeScripts(accepted);
+			hideBanner();
+			syncPanel(accepted);
+			return;
+		}
+
+		if (event.target.closest('[data-cdp-cookies-reject]')) {
+			var rejected = buildConsent(false);
+			writeConsent(rejected);
+			hideBanner();
+			syncPanel(rejected);
+			reloadPage();
+			return;
+		}
+
+		if (event.target.closest('[data-cdp-cookies-configure]') || event.target.closest('[data-cdp-cookies-open-preferences]')) {
+			showBanner();
+			openPanel();
+			return;
+		}
+
+		if (event.target.closest('[data-cdp-cookies-close]')) {
+			closePanel();
+			return;
+		}
+
+		if (event.target.closest('[data-cdp-cookies-save]')) {
+			saveCustomConsent();
+		}
+	});
+
+	document.addEventListener('DOMContentLoaded', function() {
+		var consent = readConsent();
+
+		if (consent) {
+			hideBanner();
+			syncPanel(consent);
+			executeScripts(consent);
+		} else {
+			showBanner();
+		}
+
+		runAudit();
+	});
+
+	function runAudit() {
+		var audit = window.cdpCookiesAudit || {};
+
+		if (!audit.enabled || !audit.ajaxUrl || !audit.nonce) {
+			return;
+		}
+
+		sendAuditSnapshot();
+
+		if (window.MutationObserver) {
+			var timeout = null;
+			var observer = new MutationObserver(function() {
+				clearTimeout(timeout);
+				timeout = setTimeout(sendAuditSnapshot, 800);
+			});
+
+			observer.observe(document.documentElement, {
+				childList: true,
+				subtree: true,
+				attributes: true,
+				attributeFilter: ['src', 'href', 'data', 'srcset']
+			});
+		}
+
+		setTimeout(sendAuditSnapshot, 2500);
+	}
+
+	function sendAuditSnapshot() {
+		var audit = window.cdpCookiesAudit || {};
+		var declared = Array.isArray(audit.declaredNames) ? audit.declaredNames : [];
+		var names = getVisibleCookieNames(declared, audit.consentCookie);
+		var resources = getExternalResources(audit.siteHost);
+		var signature = JSON.stringify({
+			cookies: names,
+			resources: resources.map(function(resource) {
+				return resource.url + '|' + resource.type;
+			})
+		});
+		var throttleKey = 'cdpCookiesAudit:' + location.pathname + ':' + signature;
+
+		try {
+			if (sessionStorage.getItem(throttleKey)) {
+				return;
+			}
+			sessionStorage.setItem(throttleKey, '1');
+		} catch (error) {}
+
+		if (!names.length && !resources.length) {
+			return;
+		}
+
+		var body = new FormData();
+		body.append('action', 'cdp_cookies_audit_detected');
+		body.append('nonce', audit.nonce);
+		body.append('url', location.href);
+		names.forEach(function(name) {
+			body.append('cookie_names[]', name);
+		});
+		resources.forEach(function(resource, index) {
+			body.append('external_resources[' + index + '][url]', resource.url);
+			body.append('external_resources[' + index + '][type]', resource.type);
+		});
+
+		fetch(audit.ajaxUrl, {
+			method: 'POST',
+			credentials: 'same-origin',
+			body: body
+		}).catch(function() {});
+	}
+
+	function getVisibleCookieNames(declared, consentCookie) {
+		if (!document.cookie) {
+			return [];
+		}
+
+		return document.cookie.split(';').map(function(part) {
+			return decodeURIComponent(part.split('=')[0].trim());
+		}).filter(function(name, index, all) {
+			return name && all.indexOf(name) === index && declared.indexOf(name) === -1 && name !== consentCookie;
+		});
+	}
+
+	function getExternalResources(siteHost) {
+		var resources = [];
+		var seen = {};
+
+		function add(url, type) {
+			var absolute = normalizeResourceUrl(url);
+			var host = getUrlHost(absolute);
+			var key = absolute + '|' + type;
+
+			if (!absolute || !host || isSameHost(host, siteHost) || seen[key]) {
+				return;
+			}
+
+			seen[key] = true;
+			resources.push({
+				url: absolute,
+				type: type || 'resource'
+			});
+		}
+
+		document.querySelectorAll('script[src], iframe[src], img[src], link[href], embed[src], object[data], video[src], audio[src], source[src]').forEach(function(element) {
+			var url = element.getAttribute('src') || element.getAttribute('href') || element.getAttribute('data');
+			add(url, element.tagName.toLowerCase());
+		});
+
+		if (window.performance && typeof window.performance.getEntriesByType === 'function') {
+			window.performance.getEntriesByType('resource').forEach(function(entry) {
+				add(entry.name, entry.initiatorType || 'resource');
+			});
+		}
+
+		return resources.slice(0, 150);
+	}
+
+	function normalizeResourceUrl(url) {
+		if (!url || typeof url !== 'string') {
+			return '';
+		}
+
+		try {
+			return new URL(url, location.href).href;
+		} catch (error) {
+			return '';
+		}
+	}
+
+	function getUrlHost(url) {
+		try {
+			return new URL(url).host.toLowerCase();
+		} catch (error) {
+			return '';
+		}
+	}
+
+	function isSameHost(host, siteHost) {
+		var currentHost = location.host.toLowerCase();
+		var configuredHost = siteHost ? String(siteHost).toLowerCase() : currentHost;
+
+		return host === currentHost || host === configuredHost;
+	}
+})();

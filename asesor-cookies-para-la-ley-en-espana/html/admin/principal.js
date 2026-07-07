@@ -1,104 +1,183 @@
+function cdpCookiesActivateTab(tab) {
+	if (!tab) {
+		return;
+	}
 
-/* ======================================================================================
-   @author     Carlos Doral Pérez (http://webartesanal.com)
-   @version    0.24
-   @copyright  Copyright &copy; 2013 Carlos Doral Pérez, All Rights Reserved
-               License: GPLv2 or later
-   ====================================================================================== */
-   
-//
-function cdp_cookies_mensaje( texto, clase )
-{
-	jQuery( '.cdp-cookies-mensajes' ).removeClass( 'error' ).addClass( clase );
-	jQuery( '.cdp-cookies-mensajes' ).html( texto ).fadeIn( 500 ).delay( 2000 ).fadeOut( 500 );
+	var target = tab.getAttribute('href');
+
+	if (!target || target.charAt(0) !== '#') {
+		return;
+	}
+
+	document.querySelectorAll('.cdp-cookies-tab').forEach(function(node) {
+		node.classList.toggle('is-active', node === tab);
+	});
+
+	document.querySelectorAll('.cdp-cookies-card').forEach(function(section) {
+		section.hidden = '#' + section.id !== target;
+	});
+
+	try {
+		window.localStorage.setItem('cdpCookiesActiveTab', target);
+	} catch (error) {}
 }
 
-//
-function cdp_cookies_mensaje_error( texto )
-{
-	cdp_cookies_mensaje( texto, 'error' );
-}
+document.addEventListener('click', function(event) {
+	var editButton = event.target.closest('[data-cdp-edit-cookie]');
 
-//
-function guardar()
-{ 
-	//
-	var datos = {
-		action: 'guardar_config',
-		texto_aviso: jQuery( '#texto_aviso' ).val(),
-		tam_fuente: jQuery( '#tam_fuente' ).val(),
-		posicion_solapa: jQuery( '#posicion_solapa' ).val(),
-		alineacion: jQuery( '#alineacion' ).val(),
-		tema: jQuery( '#tema:checked' ).val(),
-		enlace_politica: jQuery( '#enlace_politica' ).val(),
-		enlace_mas_informacion: jQuery( '#enlace_mas_informacion' ).val(),
-		nonce_guardar: cdp_cookies_info.nonce_guardar
+	if (editButton) {
+		var editId = editButton.getAttribute('data-cdp-edit-cookie');
+		var editRow = document.querySelector('[data-cdp-edit-cookie-row="' + editId + '"]');
+
+		if (editRow) {
+			editRow.hidden = !editRow.hidden;
+		}
+
+		return;
+	}
+
+	var cancelEditButton = event.target.closest('[data-cdp-cancel-edit-cookie]');
+
+	if (cancelEditButton) {
+		var cancelId = cancelEditButton.getAttribute('data-cdp-cancel-edit-cookie');
+		var cancelRow = document.querySelector('[data-cdp-edit-cookie-row="' + cancelId + '"]');
+
+		if (cancelRow) {
+			cancelRow.hidden = true;
+		}
+
+		return;
+	}
+
+	var languageTab = event.target.closest('[data-cdp-banner-lang]');
+
+	if (languageTab) {
+		var language = languageTab.getAttribute('data-cdp-banner-lang');
+		var wrapper = languageTab.closest('[data-cdp-banner-lang-tabs]');
+
+		if (wrapper) {
+			wrapper.querySelectorAll('[data-cdp-banner-lang]').forEach(function(node) {
+				node.classList.toggle('is-active', node === languageTab);
+			});
+		}
+
+		document.querySelectorAll('[data-cdp-banner-text]').forEach(function(textarea) {
+			textarea.hidden = textarea.getAttribute('data-cdp-banner-text') !== language;
+		});
+
+		return;
+	}
+
+	var tab = event.target.closest('.cdp-cookies-tab');
+
+	if (!tab) {
+		tab = event.target.closest('.cdp-cookies-card a[href^="#cdp-cookies-"]');
+	}
+
+	if (!tab) {
+		return;
+	}
+
+	event.preventDefault();
+	cdpCookiesActivateTab(tab);
+
+	if (history.replaceState) {
+		history.replaceState(null, '', tab.getAttribute('href'));
+	}
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+	var target = window.location.hash;
+
+	if (!target) {
+		try {
+			target = window.localStorage.getItem('cdpCookiesActiveTab') || '';
+		} catch (error) {}
+	}
+
+	var tab = target ? document.querySelector('.cdp-cookies-tab[href="' + target + '"]') : null;
+
+	cdpCookiesActivateTab(tab || document.querySelector('.cdp-cookies-tab'));
+});
+
+document.addEventListener('change', function(event) {
+	var select = event.target.closest('[data-cdp-cookie-preset]');
+
+	if (!select || !select.value || !window.cdpCookiesAdmin || !window.cdpCookiesAdmin.presets) {
+		return;
+	}
+
+	var preset = window.cdpCookiesAdmin.presets[select.value];
+
+	if (!preset) {
+		return;
+	}
+
+	var fields = {
+		cookie_name: preset.name || '',
+		cookie_provider: preset.provider || '',
+		cookie_service_pattern: preset.service_pattern || '',
+		cookie_category: preset.category || 'necessary',
+		cookie_type: preset.type || 'own',
+		cookie_duration: preset.duration || '',
+		cookie_description: preset.description || ''
 	};
 
-	//
-	jQuery.post( ajaxurl, datos, function( resul ) {
-		if( resul.ok )
-			cdp_cookies_mensaje( resul.txt );
-		else
-			cdp_cookies_mensaje_error( resul.txt );
-	}, 'json' );
-}
+	Object.keys(fields).forEach(function(id) {
+		var field = document.getElementById(id);
 
-//
-function crear_paginas()
-{
-	//
-	var datos = {
-		action: 'crear_paginas',
-		nonce_crear_paginas : cdp_cookies_info.nonce_crear_paginas
-	};
-
-	//
-	jQuery.post( ajaxurl, datos, function( resul ) {
-		if( resul.ok )
-		{
-			cdp_cookies_mensaje( resul.txt );
-			jQuery( '#enlace_mas_informacion' ).val( resul.url_info );
-			jQuery( '#enlace_politica' ).val( resul.url_politica );
+		if (field) {
+			field.value = fields[id];
 		}
-		else
-		{
-			cdp_cookies_mensaje_error( resul.txt );
+	});
+});
+
+document.addEventListener('submit', function(event) {
+	var form = event.target.closest('[data-cdp-delete-cookie-form]');
+
+	if (!form) {
+		return;
+	}
+
+	event.preventDefault();
+
+	if (window.cdpCookiesAdmin && window.cdpCookiesAdmin.deleteConfirm && !window.confirm(window.cdpCookiesAdmin.deleteConfirm)) {
+		return;
+	}
+
+	var button = form.querySelector('button[type="submit"]');
+	var cookieIdInput = form.querySelector('input[name="cookie_id"]');
+	var body = new FormData();
+
+	body.append('action', 'cdp_cookies_delete_cookie');
+	body.append('nonce', window.cdpCookiesAdmin ? window.cdpCookiesAdmin.deleteNonce : '');
+	body.append('cookie_id', cookieIdInput ? cookieIdInput.value : '');
+
+	if (button) {
+		button.disabled = true;
+	}
+
+	fetch(window.cdpCookiesAdmin.ajaxUrl, {
+		method: 'POST',
+		credentials: 'same-origin',
+		body: body
+	}).then(function(response) {
+		return response.json();
+	}).then(function(payload) {
+		if (!payload || !payload.success) {
+			throw new Error(payload && payload.data && payload.data.message ? payload.data.message : '');
 		}
-	}, 'json' );
-}
 
-//
-jQuery( document ).ready( function( $ ) {
+		var row = form.closest('[data-cdp-cookie-row]');
 
-	// Ocultar/mostrar instrucciones
-	$( '.cdp-cookies-bot-instrucciones' ).click( function() {
-		$( '.cdp-cookies-instrucciones' ).toggle();
-	} );
+		if (row) {
+			row.remove();
+		}
+	}).catch(function(error) {
+		window.alert(error.message || (window.cdpCookiesAdmin ? window.cdpCookiesAdmin.deleteError : 'Error'));
 
-	// Radios más fáciles de pinchar
-	$( 'form .cdp-cookies-radio' ).click( function() {
-		$( this ).find( 'input' ).attr( 'checked', true );
-	} );
-
-	// Guardar config
-	$( 'a.cdp-cookies-guardar' ).click( function() {
-		guardar();
-	} );
-
-	// Crear pág. política
-	$( 'a.cdp-cookies-crear-politica' ).click( function() {
-		crear_paginas();
-	} );
-
-	// Ver pág. más info
-	$( 'a.cdp-cookies-ver-mas-info' ).click( function() {
-		window.open( $( '#enlace_mas_informacion' ).val() );
-	} );
-
-	// Ver pág. politica
-	$( 'a.cdp-cookies-ver-politica' ).click( function() {
-		window.open( $( '#enlace_politica' ).val() );
-	} );
-
-} );
+		if (button) {
+			button.disabled = false;
+		}
+	});
+});

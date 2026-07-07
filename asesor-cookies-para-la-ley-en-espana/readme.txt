@@ -2,40 +2,57 @@
 Contributors: Carlos Doral Pérez (<a href="https://webartesanal.com">webartesanal.com</a>)
 Tags: rgpd, cookie, cookies, spain, ley, law, politica, policy, españa, normativa
 Requires at least: 3.5
-Tested up to: 6.8.3
-Stable tag: 0.34
+Requires PHP: 7.2
+Tested up to: 7.0
+Stable tag: 1.0.41
 License: GPLv2 or later
 
-Este plugin le facilita la adaptación a la RGPD de su web a la política de cookies mostrando el aviso a los visitantes de su página y proporcionándole los textos legales y técnicos iniciales.
+Este plugin ayuda a gestionar el consentimiento de cookies en WordPress mediante banner, inventario de cookies, carga condicionada de scripts y protección de contenidos embebidos.
 
 == Description == 
 
 > **[Para más información visite Web Artesanal](https://webartesanal.com/)**
 
-El funcionamiento consiste en mostrar un mensaje cada vez que un nuevo usuario visita su web avisándole que si pulsa el botón ACEPTAR consiente la instalación de cookies en su navegador web.
+Asesor de Cookies RGPD permite mostrar un banner de consentimiento con botones para aceptar todo, rechazar las cookies no necesarias o configurar preferencias por categoría.
 
-Además este plugin le proporciona los textos legales y técnicos iniciales para confeccionar su política de cookies, se generan automáticamente y los puede editar si lo desea.
+El plugin no intenta adivinar ni bloquear automáticamente todos los elementos de una web. El propietario debe revisar su sitio y configurar los scripts, embebidos y cookies declaradas. El plugin proporciona las herramientas para hacerlo de forma ordenada.
 
 Características del plugin:
 
-* Elección del estilo de la ventana del aviso, color, tamaño de fuente, etc.
-* Elección de la posición de la solapa u ocultación de la misma.
-* Creación automática de las dos páginas con los textos legales y técnicos iniciales que necesita su web: La política de cookies y la descripción coloquial de cookies para los usuarios web. Las páginas son editables.
+* Banner de cookies con aceptar todo, rechazar y configurar.
+* Textos del banner editables en español, inglés, francés y alemán.
+* Enlace a la política de cookies añadido automáticamente desde la URL configurada.
+* Inventario manual de cookies con biblioteca de servicios habituales.
+* Cookie técnica del propio plugin declarada automáticamente.
+* Categorías fijas: necesarias, analíticas, marketing y personalización.
+* Campos para cargar scripts sólo después del consentimiento correspondiente.
+* Shortcode y bloque Gutenberg para proteger vídeos, mapas, iframes y otros embebidos externos.
+* Escáner de embebidos para ayudar a localizar contenidos externos no protegidos.
+* Auditoría asistida para ayudar a detectar cookies visibles y recursos externos mientras un administrador navega por la web.
+* Creación automática de una página de política de cookies con tabla dinámica mediante shortcode.
+* Opción para colocar el menú en Herramientas o como menú principal del administrador.
+* Botón permanente de preferencias configurable como texto o icono.
+
+Importante: declarar cookies en el inventario documenta su uso, pero no las bloquea. Para bloquear cookies no necesarias hay que controlar los scripts y embebidos que las crean.
  
 == Screenshots ==
 
-1. Este es el aviso de cookies mostrado al visitante web por primera vez.
-2. Esta es la solapa flotante que aparecerá en la parte inferior de su página.
-3. Panel de configuración que permite cambiar los colores, posición del aviso, etc.
+1. Banner de consentimiento mostrado al visitante.
+2. Panel de configuración por categorías.
+3. Inventario de cookies y biblioteca de servicios.
+4. Herramientas de auditoría asistida y escaneo de embebidos.
 
 == Installation ==
 
 1. Descargue el plugin, descomprímalo y súbalo al directorio /wp-content/plugins/
-2. Vaya al apartado plugins y active el Asesor de Cookies.
+2. Vaya al apartado Plugins y active Asesor de Cookies RGPD.
 3. Vaya a Herramientas, Asesor de Cookies.
-4. Pinche el botón 'Generar Páginas' y luego 'Guardar'.
-5. El plugin ya está funcionando con los textos legales por defecto. Si quiere editarlos vaya a Páginas y ahí verá las dos nuevas páginas que ha creado el plugin, la de 'Política de cookies' y la de 'Más información sobre las cookies' que es totalmente técnica y no tendrá que modificar.
-6. Es conveniente que añada en su menú o en el pié de página de su web un enlace 'Política de cookies' visible que debe apuntar a la página que ha creado sobre la política de cookies.
+4. Revise el texto del banner y configure la URL de la política de cookies.
+5. Cree la página de política de cookies desde el plugin o añada el shortcode [cdp_cookies_policy_table] a su página existente.
+6. Revise los scripts de la web que instalan cookies y muévalos a la categoría correspondiente dentro del plugin.
+7. Proteja vídeos, mapas, iframes y otros embebidos externos con el bloque Gutenberg "Contenido protegido por consentimiento" o con el shortcode [cdp_consent].
+8. Complete el inventario de cookies manualmente, con ayuda de la biblioteca de servicios y de la auditoría asistida.
+9. Vacíe la caché de WordPress y pruebe la web en una sesión limpia del navegador.
 
 Si lo desea, como método alternativo de instalación puede ir a la sección Plugins y hacer lo siguiente:
 
@@ -44,7 +61,50 @@ Si lo desea, como método alternativo de instalación puede ir a la sección Plu
 3. Haga click en 'Instalar'.
 4. Ahora siga desde el paso 2 de la sección anterior.
 
+== Frequently Asked Questions ==
+
+= ¿El plugin detecta automáticamente todas las cookies de mi web? =
+
+No. La detección automática completa no es fiable en una web WordPress real, especialmente cuando intervienen temas, builders, plugins, cachés, iframes o servicios externos. El plugin incluye una auditoría asistida para ayudarle a localizar cookies visibles y recursos externos, pero siempre requiere revisión manual.
+
+= ¿Declarar una cookie en el inventario la bloquea? =
+
+No. El inventario sirve para documentar las cookies en la política. Para bloquear una cookie no necesaria hay que impedir que se cargue el script o embebido que la crea hasta que el visitante dé su consentimiento.
+
+= ¿Cómo se bloquean scripts de analítica o marketing? =
+
+Debe retirar esos scripts del tema, builder, plugin o código personalizado donde estén cargándose y pegarlos en el campo de scripts de la categoría correspondiente. El plugin sólo cargará esos scripts cuando el visitante acepte esa categoría.
+
+= ¿Cómo se bloquean vídeos, mapas u otros embebidos externos? =
+
+En Gutenberg puede usar el bloque "Contenido protegido por consentimiento" y colocar el embebido dentro. En otros editores puede envolver el contenido con el shortcode [cdp_consent category="personalization" service="Google Maps"]...[/cdp_consent].
+
+= ¿Qué hace la auditoría asistida? =
+
+Permite que un administrador navegue por la web mientras el plugin registra cookies visibles del dominio actual y recursos externos cargados por la página. No detecta cookies HttpOnly ni cookies de terceros guardadas en dominios como Google, YouTube o redes sociales.
+
+= ¿Qué categorías puedo usar? =
+
+El plugin utiliza categorías fijas: necesarias, analíticas, marketing y personalización. En los shortcodes se usan los valores técnicos necessary, analytics, marketing y personalization.
+
 == Changelog ==
+
+= 1.0.41 =
+* Ajustes de textos del encabezado del administrador y contador de cookies traducido.
+
+= 1.0.40 =
+* Nueva interfaz de administración.
+* Banner con aceptar todo, rechazar y configurar.
+* Textos del banner en español, inglés, francés y alemán.
+* Enlace de política añadido dinámicamente desde la URL configurada.
+* Inventario manual de cookies y biblioteca de servicios.
+* Cookie técnica del plugin declarada automáticamente.
+* Carga de scripts según consentimiento.
+* Bloque Gutenberg y shortcode para proteger embebidos externos.
+* Auditoría asistida de cookies y recursos externos.
+* Escáner de embebidos externos.
+* Página de política de cookies con tabla dinámica.
+* Compatibilidad revisada con PHP 7.2 o superior.
 
 = 0.34 =
 * correcciones seguridad
