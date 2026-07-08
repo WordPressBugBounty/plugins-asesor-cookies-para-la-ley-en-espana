@@ -5,7 +5,7 @@ Plugin Name: Asesor de Cookies RGPD
 Plugin URI: https://webartesanal.com
 Description: Este plugin avisa a los nuevos visitantes de su web sobre la utilización de cookies en su página y le proporciona los textos iniciales para que pueda crear una política de cookies correcta y facilitarle la adaptación de su web a la RGPD
 Tags: rgpd, cookie, cookies, spain, ley, law, politica, policy, españa, normativa
-Version: 1.0.42
+Version: 1.0.43
 Requires at least: 3.5
 Requires PHP: 7.2
 Tested up to: 7.0

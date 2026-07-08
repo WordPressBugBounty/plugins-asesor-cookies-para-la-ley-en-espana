@@ -77,17 +77,30 @@
 		var template = document.createElement('template');
 		template.innerHTML = html;
 
-		activateScripts(template.content);
-
-		document.body.appendChild(template.content);
+		appendFragmentWithExecutableScripts(document.body, template.content);
 	}
 
-	function activateScripts(root) {
-		Array.prototype.slice.call(root.querySelectorAll('script')).forEach(function(oldScript) {
+	function appendFragmentWithExecutableScripts(parent, fragment) {
+		var token = 'cdp' + String(Date.now()) + String(Math.random()).replace(/\D/g, '');
+
+		Array.prototype.slice.call(fragment.querySelectorAll('script')).forEach(function(script) {
+			script.setAttribute('data-cdp-cookies-script-token', token);
+		});
+
+		parent.appendChild(fragment);
+		activateScripts(parent, token);
+	}
+
+	function activateScripts(root, token) {
+		var selector = token ? 'script[data-cdp-cookies-script-token="' + token + '"]' : 'script';
+
+		Array.prototype.slice.call(root.querySelectorAll(selector)).forEach(function(oldScript) {
 			var newScript = document.createElement('script');
 
 			Array.prototype.slice.call(oldScript.attributes).forEach(function(attribute) {
-				newScript.setAttribute(attribute.name, attribute.value);
+				if (attribute.name !== 'data-cdp-cookies-script-token') {
+					newScript.setAttribute(attribute.name, attribute.value);
+				}
 			});
 
 			newScript.text = oldScript.text || oldScript.textContent || '';
@@ -172,13 +185,12 @@
 			}
 
 			var content = template.content.cloneNode(true);
-			activateScripts(content);
 
 			if (placeholder) {
 				placeholder.remove();
 			}
 
-			wrapper.appendChild(content);
+			appendFragmentWithExecutableScripts(wrapper, content);
 			wrapper.setAttribute('data-cdp-consent-loaded', '1');
 		});
 	}

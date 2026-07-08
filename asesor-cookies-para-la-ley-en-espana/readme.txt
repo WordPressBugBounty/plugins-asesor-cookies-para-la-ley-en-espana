@@ -1,13 +1,13 @@
 === Asesor de Cookies RGPD para normativa europea ===
-Contributors: Carlos Doral Pérez (<a href="https://webartesanal.com">webartesanal.com</a>)
-Tags: rgpd, cookie, cookies, spain, ley, law, politica, policy, españa, normativa
+Contributors: cdoral
+Tags: cookie, cookies, rgpd, gdpr, consent
 Requires at least: 3.5
 Requires PHP: 7.2
 Tested up to: 7.0
-Stable tag: 1.0.42
+Stable tag: 1.0.43
 License: GPLv2 or later
 
-Este plugin ayuda a gestionar el consentimiento de cookies en WordPress mediante banner, inventario de cookies, carga condicionada de scripts y protección de contenidos embebidos.
+Gestiona el consentimiento de cookies con banner, inventario, scripts por categoría y embebidos protegidos.
 
 == Description == 
 
@@ -88,6 +88,9 @@ Permite que un administrador navegue por la web mientras el plugin registra cook
 El plugin utiliza categorías fijas: necesarias, analíticas, marketing y personalización. En los shortcodes se usan los valores técnicos necessary, analytics, marketing y personalization.
 
 == Changelog ==
+
+= 1.0.43 =
+* Mejora la activación de scripts configurados tras aceptar el consentimiento.
 
 = 1.0.42 =
 * Evita que el banner de cookies se renderice dentro del administrador, REST, AJAX o editores de widgets/bloques.
@@ -197,6 +200,14 @@ El plugin utiliza categorías fijas: necesarias, analíticas, marketing y person
 = 0.11 =
 * Versión inicial.
 
+== Upgrade Notice ==
+
+= 1.0.43 =
+Mejora la carga de scripts configurados tras aceptar cookies.
+
+= 1.0.42 =
+Corrige la carga del banner en pantallas de administración y mantiene la nueva gestión por consentimiento.
+
 == Troubleshooting ==
 
 Si este plugin no te funciona correctamente prueba a hacer lo siguiente:
@@ -204,7 +215,5 @@ Si este plugin no te funciona correctamente prueba a hacer lo siguiente:
 * Si utilizas algún sistema de caché en tu instalación WordPress prueba a borrar dicho caché.
 
 Si te sigue fallando puede ser porque otro plugin genere errores Javascript y esto impide el funcionamiento del Asesor de Cookies. Puedes probar a desactivar otros plugins para saber cuál está dando problemas.
-
-**[Si tienes otros problemas intentaremos ayudarte si envías un correo desde nuestra web](https://webartesanal.com/)**
 
 **[Te recomendamos nuestro plugin sobre mantenimiento de un sitio WordPress](https://wordpress.org/plugins/mantenimiento-web/)**
