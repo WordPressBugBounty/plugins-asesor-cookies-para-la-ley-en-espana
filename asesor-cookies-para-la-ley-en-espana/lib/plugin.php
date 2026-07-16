@@ -11,6 +11,7 @@ class cdp_cookies {
 	const OPTION_MENU_LOCATION = 'cdp_cookies_menu_location';
 	const OPTION_MIGRATION_VERSION = 'cdp_cookies_migration_version';
 	const OPTION_BANNER_TEXTS = 'cdp_cookies_textos_aviso';
+	const OPTION_BANNER_BUTTONS = 'cdp_cookies_botones_aviso';
 	const OPTION_AUDIT_ENABLED = 'cdp_cookies_audit_enabled';
 	const OPTION_AUDIT_ITEMS = 'cdp_cookies_audit_items';
 	const OPTION_AUDIT_IGNORED_ITEMS = 'cdp_cookies_audit_ignored_items';
@@ -102,6 +103,34 @@ class cdp_cookies {
 		return $texts[ $language ];
 	}
 
+	private static function get_default_banner_buttons( $language = null ) {
+		$language = $language && array_key_exists( $language, self::get_supported_banner_languages() ) ? $language : self::get_current_language();
+		$buttons = array(
+			'es' => array(
+				'accept_all' => 'Aceptar todo',
+				'reject'     => 'Rechazar',
+				'configure'  => 'Configurar',
+			),
+			'en' => array(
+				'accept_all' => 'Accept all',
+				'reject'     => 'Reject',
+				'configure'  => 'Configure',
+			),
+			'fr' => array(
+				'accept_all' => 'Tout accepter',
+				'reject'     => 'Refuser',
+				'configure'  => 'Configurer',
+			),
+			'de' => array(
+				'accept_all' => 'Alle akzeptieren',
+				'reject'     => 'Ablehnen',
+				'configure'  => 'Konfigurieren',
+			),
+		);
+
+		return $buttons[ $language ];
+	}
+
 	private static function get_policy_link_html( $language = null ) {
 		$policy_url = get_option( 'cdp_cookies_enlace_politica', '' );
 		$language = $language && array_key_exists( $language, self::get_supported_banner_languages() ) ? $language : self::get_current_language();
@@ -162,6 +191,31 @@ class cdp_cookies {
 		$policy_link = self::get_policy_link_html( $language );
 
 		return $policy_link ? trim( $text ) . ' ' . $policy_link : $text;
+	}
+
+	private static function get_banner_buttons() {
+		$buttons = get_option( self::OPTION_BANNER_BUTTONS, array() );
+		$buttons = is_array( $buttons ) ? $buttons : array();
+
+		foreach ( self::get_supported_banner_languages() as $language => $label ) {
+			$defaults = self::get_default_banner_buttons( $language );
+			$current = isset( $buttons[ $language ] ) && is_array( $buttons[ $language ] ) ? $buttons[ $language ] : array();
+
+			foreach ( $defaults as $key => $value ) {
+				$current[ $key ] = isset( $current[ $key ] ) && '' !== trim( (string) $current[ $key ] ) ? sanitize_text_field( $current[ $key ] ) : $value;
+			}
+
+			$buttons[ $language ] = $current;
+		}
+
+		return $buttons;
+	}
+
+	private static function get_banner_button_labels() {
+		$buttons = self::get_banner_buttons();
+		$language = self::get_current_language();
+
+		return ! empty( $buttons[ $language ] ) ? $buttons[ $language ] : $buttons['en'];
 	}
 
 	private static function run_migrations() {
@@ -679,6 +733,22 @@ class cdp_cookies {
 
 			update_option( self::OPTION_BANNER_TEXTS, $texts, false );
 			self::parametro( 'texto_aviso', $texts[ self::get_current_language() ] );
+		}
+
+		if ( isset( $_POST['botones_aviso'] ) && is_array( $_POST['botones_aviso'] ) ) {
+			$posted_buttons = wp_unslash( $_POST['botones_aviso'] );
+			$buttons = array();
+
+			foreach ( self::get_supported_banner_languages() as $language => $label ) {
+				$defaults = self::get_default_banner_buttons( $language );
+				$buttons[ $language ] = array();
+
+				foreach ( $defaults as $key => $value ) {
+					$buttons[ $language ][ $key ] = isset( $posted_buttons[ $language ][ $key ] ) ? sanitize_text_field( $posted_buttons[ $language ][ $key ] ) : $value;
+				}
+			}
+
+			update_option( self::OPTION_BANNER_BUTTONS, $buttons, false );
 		}
 
 		if ( isset( $_POST['enlace_politica'] ) ) {
@@ -1675,6 +1745,7 @@ class cdp_cookies {
 		}
 
 		$text = self::get_banner_text();
+		$banner_buttons = self::get_banner_button_labels();
 		$preferences_button = self::get_preferences_button_settings();
 
 		$categories = self::get_front_categories();
@@ -1685,9 +1756,9 @@ class cdp_cookies {
 			<div class="cdp-cookies-banner__body">
 				<div class="cdp-cookies-banner__text"><?php echo wp_kses_post( wpautop( $text ) ); ?></div>
 				<div class="cdp-cookies-banner__actions">
-					<button type="button" class="cdp-cookies-button cdp-cookies-button--primary" data-cdp-cookies-accept-all><?php esc_html_e( 'Accept all', 'asesor-cookies-para-la-ley-en-espana' ); ?></button>
-					<button type="button" class="cdp-cookies-button" data-cdp-cookies-reject><?php esc_html_e( 'Reject', 'asesor-cookies-para-la-ley-en-espana' ); ?></button>
-					<button type="button" class="cdp-cookies-button" data-cdp-cookies-configure><?php esc_html_e( 'Configure', 'asesor-cookies-para-la-ley-en-espana' ); ?></button>
+					<button type="button" class="cdp-cookies-button cdp-cookies-button--primary" data-cdp-cookies-accept-all><?php echo esc_html( $banner_buttons['accept_all'] ); ?></button>
+					<button type="button" class="cdp-cookies-button" data-cdp-cookies-reject><?php echo esc_html( $banner_buttons['reject'] ); ?></button>
+					<button type="button" class="cdp-cookies-button" data-cdp-cookies-configure><?php echo esc_html( $banner_buttons['configure'] ); ?></button>
 				</div>
 			</div>
 			<div class="cdp-cookies-panel" data-cdp-cookies-panel hidden>
@@ -1865,6 +1936,7 @@ class cdp_cookies {
 		$categories = self::get_categories();
 		$menu_location = self::get_menu_location();
 		$banner_texts = self::get_banner_texts();
+		$banner_buttons = self::get_banner_buttons();
 		$current_language = self::get_current_language();
 		$audit_items = self::get_audit_items();
 		$ignored_audit_items = self::get_ignored_audit_items();
@@ -1924,6 +1996,8 @@ class cdp_cookies {
 					</div>
 					<p><?php esc_html_e( 'This plugin has two main functions: helping you detect cookies and helping you block them until the visitor gives consent.', 'asesor-cookies-para-la-ley-en-espana' ); ?></p>
 					<p><?php esc_html_e( 'Detection helps you complete the cookie policy with the cookies and external services used by the website. Blocking requires: move cookie-setting scripts into this plugin, wrap external embeds, and manually declare the rest of the cookies. The Assisted audit tab can help you detect cookies more easily, although your review will always be required.', 'asesor-cookies-para-la-ley-en-espana' ); ?></p>
+					<p><?php esc_html_e( 'To show the cookie inventory on your cookie policy page, add this shortcode where the cookie list should appear:', 'asesor-cookies-para-la-ley-en-espana' ); ?></p>
+					<code class="cdp-cookies-shortcode-example">[cdp_cookies_policy_table]</code>
 					<h3><?php esc_html_e( 'Embeds', 'asesor-cookies-para-la-ley-en-espana' ); ?></h3>
 					<p><?php esc_html_e( 'Wrap every video, map, iframe, or external embed that may install cookies. In Gutenberg, use the "Consent-protected content" block and place the embed inside it. If this website does not use Gutenberg, place the opening and closing consent shortcodes manually around the embed.', 'asesor-cookies-para-la-ley-en-espana' ); ?></p>
 					<code class="cdp-cookies-shortcode-example">[cdp_consent category="personalization" service="YouTube"]...[/cdp_consent]</code>
@@ -1988,13 +2062,43 @@ class cdp_cookies {
 							</div>
 							<?php foreach ( self::get_supported_banner_languages() as $language => $label ) : ?>
 								<textarea id="texto_aviso_<?php echo esc_attr( $language ); ?>" name="textos_aviso[<?php echo esc_attr( $language ); ?>]" rows="5" data-cdp-banner-text="<?php echo esc_attr( $language ); ?>" <?php echo $language === $current_language ? '' : 'hidden'; ?>><?php echo esc_textarea( $banner_texts[ $language ] ); ?></textarea>
-							<?php endforeach; ?>
-								<p class="description"><?php esc_html_e( 'Write the banner text here. The cookie policy link is added automatically from the URL field below.', 'asesor-cookies-para-la-ley-en-espana' ); ?></p>
-						</div>
+								<?php endforeach; ?>
+									<p class="description"><?php esc_html_e( 'Write the banner text here. The cookie policy link is added automatically from the URL field below.', 'asesor-cookies-para-la-ley-en-espana' ); ?></p>
+							</div>
 
-						<label for="enlace_politica"><?php esc_html_e( 'Cookie policy page URL', 'asesor-cookies-para-la-ley-en-espana' ); ?></label>
+							<label><?php esc_html_e( 'Banner button texts', 'asesor-cookies-para-la-ley-en-espana' ); ?></label>
+							<div>
+								<div class="cdp-cookies-banner-button-fields">
+									<?php foreach ( self::get_supported_banner_languages() as $language => $label ) : ?>
+									<div class="cdp-cookies-banner-button-row">
+										<strong class="cdp-cookies-banner-button-language"><?php echo esc_html( $label ); ?></strong>
+										<label>
+											<span><?php esc_html_e( 'Accept all button', 'asesor-cookies-para-la-ley-en-espana' ); ?></span>
+											<input type="text" name="botones_aviso[<?php echo esc_attr( $language ); ?>][accept_all]" value="<?php echo esc_attr( $banner_buttons[ $language ]['accept_all'] ); ?>">
+										</label>
+										<label>
+											<span><?php esc_html_e( 'Reject button', 'asesor-cookies-para-la-ley-en-espana' ); ?></span>
+											<input type="text" name="botones_aviso[<?php echo esc_attr( $language ); ?>][reject]" value="<?php echo esc_attr( $banner_buttons[ $language ]['reject'] ); ?>">
+										</label>
+										<label>
+											<span><?php esc_html_e( 'Configure button', 'asesor-cookies-para-la-ley-en-espana' ); ?></span>
+											<input type="text" name="botones_aviso[<?php echo esc_attr( $language ); ?>][configure]" value="<?php echo esc_attr( $banner_buttons[ $language ]['configure'] ); ?>">
+										</label>
+									</div>
+									<?php endforeach; ?>
+								</div>
+								<p class="description"><?php esc_html_e( 'These labels are shown in the main cookie banner for each language.', 'asesor-cookies-para-la-ley-en-espana' ); ?></p>
+							</div>
+
+							<label for="enlace_politica"><?php esc_html_e( 'Cookie policy page URL', 'asesor-cookies-para-la-ley-en-espana' ); ?></label>
+							<div>
+								<input id="enlace_politica" type="url" name="enlace_politica" value="<?php echo esc_attr( self::parametro( 'enlace_politica' ) ); ?>">
+							</div>
+
+						<label><?php esc_html_e( 'Link to reopen the cookie banner', 'asesor-cookies-para-la-ley-en-espana' ); ?></label>
 						<div>
-							<input id="enlace_politica" type="url" name="enlace_politica" value="<?php echo esc_attr( self::parametro( 'enlace_politica' ) ); ?>">
+							<code class="cdp-cookies-shortcode-example">#cdp-cookies-preferences</code>
+							<p class="description"><?php esc_html_e( 'Use this value as the URL of any text link, button, or menu item. Clicking it will reopen the banner and cookie settings.', 'asesor-cookies-para-la-ley-en-espana' ); ?></p>
 						</div>
 
 						<label><?php esc_html_e( 'Preferences button style', 'asesor-cookies-para-la-ley-en-espana' ); ?></label>
@@ -2095,7 +2199,9 @@ class cdp_cookies {
 					<form method="post">
 						<?php wp_nonce_field( 'cdp_cookies_admin_action', 'cdp_cookies_nonce' ); ?>
 						<input type="hidden" name="cdp_cookies_action" value="create_policy_page">
-						<p><?php esc_html_e( 'The created page includes the shortcode [cdp_cookies_policy_table], which will show the cookies declared in this plugin, both current and future ones. If you already have a previous cookie page, you only need to add the shortcode wherever you prefer to show the cookie table.', 'asesor-cookies-para-la-ley-en-espana' ); ?></p>
+						<p><?php esc_html_e( 'The page created by the plugin includes this shortcode automatically. If you already have a cookie policy page, add it where the cookie list should appear:', 'asesor-cookies-para-la-ley-en-espana' ); ?></p>
+						<code class="cdp-cookies-shortcode-example">[cdp_cookies_policy_table]</code>
+						<p class="description"><?php esc_html_e( 'The table will always show the cookies currently declared in the inventory and will update automatically when the inventory changes.', 'asesor-cookies-para-la-ley-en-espana' ); ?></p>
 						<button type="submit" class="button button-primary"><?php esc_html_e( 'Create cookie policy page', 'asesor-cookies-para-la-ley-en-espana' ); ?></button>
 						<p class="description"><?php esc_html_e( 'If this admin page has been open for many hours, reload it before creating the page to refresh the security token.', 'asesor-cookies-para-la-ley-en-espana' ); ?></p>
 					</form>
@@ -2106,6 +2212,8 @@ class cdp_cookies {
 						<h2><?php esc_html_e( 'Cookie inventory', 'asesor-cookies-para-la-ley-en-espana' ); ?></h2>
 					</div>
 					<p class="description"><?php esc_html_e( 'Declaring cookies does not block cookies; to block them, you must control the code that creates them. Service patterns help connect detected external domains with the services declared in this inventory.', 'asesor-cookies-para-la-ley-en-espana' ); ?></p>
+					<p><?php esc_html_e( 'Add this shortcode to your cookie policy page to display this inventory:', 'asesor-cookies-para-la-ley-en-espana' ); ?></p>
+					<code class="cdp-cookies-shortcode-example">[cdp_cookies_policy_table]</code>
 
 					<form method="post" class="cdp-cookies-two-col-form">
 						<?php wp_nonce_field( 'cdp_cookies_admin_action', 'cdp_cookies_nonce' ); ?>

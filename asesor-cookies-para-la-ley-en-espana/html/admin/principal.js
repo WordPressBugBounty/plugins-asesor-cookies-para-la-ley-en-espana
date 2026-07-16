@@ -61,12 +61,12 @@ document.addEventListener('click', function(event) {
 			});
 		}
 
-		document.querySelectorAll('[data-cdp-banner-text]').forEach(function(textarea) {
-			textarea.hidden = textarea.getAttribute('data-cdp-banner-text') !== language;
-		});
+			document.querySelectorAll('[data-cdp-banner-text]').forEach(function(textarea) {
+				textarea.hidden = textarea.getAttribute('data-cdp-banner-text') !== language;
+			});
 
-		return;
-	}
+			return;
+		}
 
 	var tab = event.target.closest('.cdp-cookies-tab');
 

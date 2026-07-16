@@ -4,7 +4,7 @@ Tags: cookie, cookies, rgpd, gdpr, consent
 Requires at least: 3.5
 Requires PHP: 7.2
 Tested up to: 7.0
-Stable tag: 1.0.43
+Stable tag: 1.0.45
 License: GPLv2 or later
 
 Gestiona el consentimiento de cookies con banner, inventario, scripts por categoría y embebidos protegidos.
@@ -88,6 +88,12 @@ Permite que un administrador navegue por la web mientras el plugin registra cook
 El plugin utiliza categorías fijas: necesarias, analíticas, marketing y personalización. En los shortcodes se usan los valores técnicos necessary, analytics, marketing y personalization.
 
 == Changelog ==
+
+= 1.0.45 =
+* Permite editar los textos de los botones principales del banner en español, inglés, francés y alemán.
+* Presenta los textos editables de los botones en filas identificadas por idioma y con las etiquetas alineadas a la izquierda.
+* Permite reabrir el banner desde cualquier enlace que apunte a #cdp-cookies-preferences.
+* Destaca el shortcode de la tabla del inventario en Inicio, Política de cookies e Inventario.
 
 = 1.0.43 =
 * Mejora la activación de scripts configurados tras aceptar el consentimiento.
@@ -202,8 +208,12 @@ El plugin utiliza categorías fijas: necesarias, analíticas, marketing y person
 
 == Upgrade Notice ==
 
+= 1.0.45 =
+Añade la edición multidioma de los botones, permite reabrir la configuración desde enlaces y mejora la visibilidad del shortcode del inventario.
+
 = 1.0.43 =
 Mejora la carga de scripts configurados tras aceptar cookies.
+Actualiza capturas de pantalla del plugin.
 
 = 1.0.42 =
 Corrige la carga del banner en pantallas de administración y mantiene la nueva gestión por consentimiento.

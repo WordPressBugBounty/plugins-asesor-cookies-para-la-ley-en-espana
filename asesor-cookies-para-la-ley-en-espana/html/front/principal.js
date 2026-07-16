@@ -206,6 +206,10 @@
 
 	document.addEventListener('click', function(event) {
 		var embedButton = event.target.closest('[data-cdp-consent-embed-accept]');
+		var preferencesLink = event.target.closest('a[href]');
+		var opensPreferences = preferencesLink &&
+			preferencesLink.hash === '#cdp-cookies-preferences' &&
+			preferencesLink.origin === window.location.origin;
 
 		if (embedButton) {
 			acceptEmbedCategory(embedButton.getAttribute('data-cdp-consent-embed-accept'));
@@ -230,7 +234,8 @@
 			return;
 		}
 
-		if (event.target.closest('[data-cdp-cookies-configure]') || event.target.closest('[data-cdp-cookies-open-preferences]')) {
+		if (event.target.closest('[data-cdp-cookies-configure]') || event.target.closest('[data-cdp-cookies-open-preferences]') || opensPreferences) {
+			event.preventDefault();
 			showBanner();
 			openPanel();
 			return;
@@ -255,6 +260,11 @@
 			executeScripts(consent);
 		} else {
 			showBanner();
+		}
+
+		if (window.location.hash === '#cdp-cookies-preferences') {
+			showBanner();
+			openPanel();
 		}
 
 		runAudit();
