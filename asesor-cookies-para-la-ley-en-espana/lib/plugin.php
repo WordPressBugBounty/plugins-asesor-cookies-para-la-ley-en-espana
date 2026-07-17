@@ -152,20 +152,32 @@ class cdp_cookies {
 		);
 	}
 
-	private static function strip_policy_links_from_banner_text( $text ) {
-		$labels = array(
-			'Política de cookies',
-			'Cookie policy',
-			'Politique de cookies',
-			'Cookie-Richtlinie',
-		);
-
-		foreach ( $labels as $label ) {
-			$pattern = '/\s*<a\b[^>]*>\s*' . preg_quote( $label, '/' ) . '\s*<\/a>\s*/iu';
-			$text = preg_replace( $pattern, ' ', $text );
+	private static function banner_text_has_policy_link( $text, $policy_url ) {
+		if ( ! $policy_url || ! preg_match_all( '/<a\b[^>]*\bhref\s*=\s*(?:"([^"]*)"|\'([^\']*)\'|([^\s>]+))/i', (string) $text, $matches, PREG_SET_ORDER ) ) {
+			return false;
 		}
 
-		return trim( preg_replace( '/[ \t]+/', ' ', (string) $text ) );
+		$policy_url = untrailingslashit( html_entity_decode( trim( $policy_url ), ENT_QUOTES, 'UTF-8' ) );
+
+		foreach ( $matches as $match ) {
+			$href = '';
+
+			if ( isset( $match[1] ) && '' !== $match[1] ) {
+				$href = $match[1];
+			} elseif ( isset( $match[2] ) && '' !== $match[2] ) {
+				$href = $match[2];
+			} elseif ( isset( $match[3] ) ) {
+				$href = $match[3];
+			}
+
+			$href = untrailingslashit( html_entity_decode( trim( $href ), ENT_QUOTES, 'UTF-8' ) );
+
+			if ( $href === $policy_url ) {
+				return true;
+			}
+		}
+
+		return false;
 	}
 
 	private static function get_banner_texts() {
@@ -176,8 +188,6 @@ class cdp_cookies {
 			if ( empty( $texts[ $language ] ) ) {
 				$texts[ $language ] = self::get_default_banner_text( $language );
 			}
-
-			$texts[ $language ] = self::strip_policy_links_from_banner_text( $texts[ $language ] );
 		}
 
 		return $texts;
@@ -190,7 +200,11 @@ class cdp_cookies {
 		$text = ! empty( $texts[ $language ] ) ? $texts[ $language ] : $texts['en'];
 		$policy_link = self::get_policy_link_html( $language );
 
-		return $policy_link ? trim( $text ) . ' ' . $policy_link : $text;
+		if ( $policy_link && ! self::banner_text_has_policy_link( $text, get_option( 'cdp_cookies_enlace_politica', '' ) ) ) {
+			return trim( $text ) . ' ' . $policy_link;
+		}
+
+		return $text;
 	}
 
 	private static function get_banner_buttons() {
@@ -720,7 +734,7 @@ class cdp_cookies {
 
 	private static function handle_save_settings() {
 		if ( isset( $_POST['texto_aviso'] ) ) {
-			self::parametro( 'texto_aviso', self::strip_policy_links_from_banner_text( wp_kses_post( wp_unslash( $_POST['texto_aviso'] ) ) ) );
+			self::parametro( 'texto_aviso', wp_kses_post( wp_unslash( $_POST['texto_aviso'] ) ) );
 		}
 
 		if ( isset( $_POST['textos_aviso'] ) && is_array( $_POST['textos_aviso'] ) ) {
@@ -728,7 +742,7 @@ class cdp_cookies {
 			$texts = array();
 
 			foreach ( self::get_supported_banner_languages() as $language => $label ) {
-				$texts[ $language ] = isset( $posted_texts[ $language ] ) ? self::strip_policy_links_from_banner_text( wp_kses_post( $posted_texts[ $language ] ) ) : self::get_default_banner_text( $language );
+				$texts[ $language ] = isset( $posted_texts[ $language ] ) ? wp_kses_post( $posted_texts[ $language ] ) : self::get_default_banner_text( $language );
 			}
 
 			update_option( self::OPTION_BANNER_TEXTS, $texts, false );
@@ -1181,6 +1195,7 @@ class cdp_cookies {
 			'YouTube'     => array( 'youtube', 'youtu.be' ),
 			'Vimeo'       => array( 'vimeo' ),
 			'Google Maps' => array( 'google.com/maps', 'maps.google', 'map', 'maps' ),
+			'Google Fonts' => array( 'fonts.googleapis.com', 'fonts.gstatic.com' ),
 			'Calendly'    => array( 'calendly' ),
 			'Spotify'     => array( 'spotify' ),
 			'SoundCloud'  => array( 'soundcloud' ),
@@ -1464,6 +1479,10 @@ class cdp_cookies {
 	}
 
 	private static function get_audit_cookie_notice( $name ) {
+		if ( 0 === strpos( $name, 'wfwaf-authcookie-' ) ) {
+			return __( 'Technical Wordfence cookie for authenticated users. Its detection does not mean that anonymous visitors receive it.', 'asesor-cookies-para-la-ley-en-espana' );
+		}
+
 		if ( self::is_auditable_cookie_name( $name ) ) {
 			return '';
 		}
@@ -1756,7 +1775,7 @@ class cdp_cookies {
 			<div class="cdp-cookies-banner__body">
 				<div class="cdp-cookies-banner__text"><?php echo wp_kses_post( wpautop( $text ) ); ?></div>
 				<div class="cdp-cookies-banner__actions">
-					<button type="button" class="cdp-cookies-button cdp-cookies-button--primary" data-cdp-cookies-accept-all><?php echo esc_html( $banner_buttons['accept_all'] ); ?></button>
+					<button type="button" class="cdp-cookies-button" data-cdp-cookies-accept-all><?php echo esc_html( $banner_buttons['accept_all'] ); ?></button>
 					<button type="button" class="cdp-cookies-button" data-cdp-cookies-reject><?php echo esc_html( $banner_buttons['reject'] ); ?></button>
 					<button type="button" class="cdp-cookies-button" data-cdp-cookies-configure><?php echo esc_html( $banner_buttons['configure'] ); ?></button>
 				</div>
@@ -1949,7 +1968,7 @@ class cdp_cookies {
 		$embed_scan_date = self::get_embed_scan_date();
 		?>
 		<div class="wrap cdp-cookies-admin">
-			<h1><?php esc_html_e( 'Cookie Advisor', 'asesor-cookies-para-la-ley-en-espana' ); ?></h1>
+			<h1><?php esc_html_e( 'Cookie Advisor', 'asesor-cookies-para-la-ley-en-espana' ); ?> <span class="cdp-cookies-pill">v<?php echo esc_html( CDP_COOKIES_VERSION ); ?></span></h1>
 			<p class="cdp-cookies-intro"><?php esc_html_e( 'Manage consent, declare the cookies used by this site, and load non-essential scripts only after visitor consent.', 'asesor-cookies-para-la-ley-en-espana' ); ?></p>
 
 			<?php if ( isset( $_GET['cdp_cookies_preset_status'] ) ) : ?>
@@ -2063,7 +2082,11 @@ class cdp_cookies {
 							<?php foreach ( self::get_supported_banner_languages() as $language => $label ) : ?>
 								<textarea id="texto_aviso_<?php echo esc_attr( $language ); ?>" name="textos_aviso[<?php echo esc_attr( $language ); ?>]" rows="5" data-cdp-banner-text="<?php echo esc_attr( $language ); ?>" <?php echo $language === $current_language ? '' : 'hidden'; ?>><?php echo esc_textarea( $banner_texts[ $language ] ); ?></textarea>
 								<?php endforeach; ?>
-									<p class="description"><?php esc_html_e( 'Write the banner text here. The cookie policy link is added automatically from the URL field below.', 'asesor-cookies-para-la-ley-en-espana' ); ?></p>
+									<p class="description"><?php esc_html_e( 'You may include a link to the configured cookie policy URL anywhere in this text. If the text does not contain that link, the plugin will add it automatically at the end.', 'asesor-cookies-para-la-ley-en-espana' ); ?></p>
+									<?php if ( self::parametro( 'enlace_politica' ) ) : ?>
+										<p class="description"><?php esc_html_e( 'Example of a manually positioned link:', 'asesor-cookies-para-la-ley-en-espana' ); ?></p>
+										<code class="cdp-cookies-shortcode-example"><?php echo esc_html( self::get_policy_link_html( $current_language ) ); ?></code>
+									<?php endif; ?>
 							</div>
 
 							<label><?php esc_html_e( 'Banner button texts', 'asesor-cookies-para-la-ley-en-espana' ); ?></label>
@@ -2487,7 +2510,7 @@ class cdp_cookies {
 						<button type="submit" class="button"><?php esc_html_e( 'Clear audit results', 'asesor-cookies-para-la-ley-en-espana' ); ?></button>
 					</form>
 					<h3><?php esc_html_e( 'External services detected during recording', 'asesor-cookies-para-la-ley-en-espana' ); ?></h3>
-					<p class="description"><?php esc_html_e( 'These are external domains loaded by the page. They do not prove which cookies were installed, but they help identify services that may need consent and inventory declaration.', 'asesor-cookies-para-la-ley-en-espana' ); ?></p>
+					<p class="description"><?php esc_html_e( 'These are external domains loaded by the page. They do not prove which cookies were installed. Review each service for privacy purposes and add it to the cookie inventory only when it uses cookies.', 'asesor-cookies-para-la-ley-en-espana' ); ?></p>
 					<div class="cdp-cookies-table-wrap">
 						<table class="cdp-cookies-table">
 							<thead>
@@ -2511,9 +2534,13 @@ class cdp_cookies {
 									$is_declared_service = self::service_pattern_matches_resource( $resource, $declared_service_patterns );
 									?>
 									<tr>
-										<td>
-											<?php echo esc_html( $resource['service'] ?? '' ); ?>
-											<?php if ( $is_declared_service ) : ?>
+									<td>
+										<?php echo esc_html( $resource['service'] ?? '' ); ?>
+										<?php if ( 'Google Fonts' === ( $resource['service'] ?? '' ) ) : ?>
+											<span class="cdp-cookies-status-badge"><?php esc_html_e( 'No cookies', 'asesor-cookies-para-la-ley-en-espana' ); ?></span>
+											<p class="description"><?php esc_html_e( 'The external request transmits technical data such as the visitor IP address. Review the privacy policy or host the fonts locally.', 'asesor-cookies-para-la-ley-en-espana' ); ?></p>
+										<?php endif; ?>
+										<?php if ( $is_declared_service ) : ?>
 												<span class="cdp-cookies-status-badge"><?php esc_html_e( 'Already declared', 'asesor-cookies-para-la-ley-en-espana' ); ?></span>
 											<?php endif; ?>
 										</td>
@@ -2792,6 +2819,25 @@ class cdp_cookies {
 					array( 'name' => 'gravatar.com', 'provider' => 'Automattic/Gravatar', 'category' => 'personalization', 'type' => 'third_party', 'duration' => __( 'Session', 'asesor-cookies-para-la-ley-en-espana' ), 'description' => __( 'Loads user avatar images from Gravatar.', 'asesor-cookies-para-la-ley-en-espana' ) ),
 				),
 			),
+			'woocommerce' => array(
+				'label'           => 'WooCommerce',
+				'service_pattern' => '',
+				'cookies' => array(
+					array( 'name' => 'woocommerce_cart_hash', 'provider' => 'WooCommerce', 'category' => 'necessary', 'type' => 'own', 'duration' => __( 'Session', 'asesor-cookies-para-la-ley-en-espana' ), 'description' => __( 'Helps WooCommerce determine when the cart contents or data change.', 'asesor-cookies-para-la-ley-en-espana' ) ),
+					array( 'name' => 'woocommerce_items_in_cart', 'provider' => 'WooCommerce', 'category' => 'necessary', 'type' => 'own', 'duration' => __( 'Session', 'asesor-cookies-para-la-ley-en-espana' ), 'description' => __( 'Helps WooCommerce determine when the cart contents or data change.', 'asesor-cookies-para-la-ley-en-espana' ) ),
+					array( 'name' => 'wp_woocommerce_session_*', 'provider' => 'WooCommerce', 'category' => 'necessary', 'type' => 'own', 'duration' => __( '2 days', 'asesor-cookies-para-la-ley-en-espana' ), 'description' => __( 'Stores a unique customer code used to retrieve cart data from the website database.', 'asesor-cookies-para-la-ley-en-espana' ) ),
+					array( 'name' => 'woocommerce_recently_viewed', 'provider' => 'WooCommerce', 'category' => 'personalization', 'type' => 'own', 'duration' => __( 'Session', 'asesor-cookies-para-la-ley-en-espana' ), 'description' => __( 'Supports the recently viewed products widget when it is enabled.', 'asesor-cookies-para-la-ley-en-espana' ) ),
+					array( 'name' => 'store_notice*', 'provider' => 'WooCommerce', 'category' => 'personalization', 'type' => 'own', 'duration' => __( 'Session', 'asesor-cookies-para-la-ley-en-espana' ), 'description' => __( 'Remembers that the customer dismissed the store notice.', 'asesor-cookies-para-la-ley-en-espana' ) ),
+					array( 'name' => 'sbjs_*', 'provider' => 'WooCommerce', 'category' => 'analytics', 'type' => 'own', 'duration' => __( 'Session', 'asesor-cookies-para-la-ley-en-espana' ), 'description' => __( 'Records order source attribution during the current browsing session when this feature is enabled.', 'asesor-cookies-para-la-ley-en-espana' ) ),
+				),
+			),
+			'wordfence' => array(
+				'label'           => 'Wordfence',
+				'service_pattern' => '',
+				'cookies' => array(
+					array( 'name' => 'wfwaf-authcookie-*', 'provider' => 'Wordfence', 'category' => 'necessary', 'type' => 'own', 'duration' => __( '12 hours', 'asesor-cookies-para-la-ley-en-espana' ), 'description' => __( 'Allows the Wordfence firewall to identify authenticated users and check their capabilities before WordPress loads.', 'asesor-cookies-para-la-ley-en-espana' ) ),
+				),
+			),
 		);
 	}
 
@@ -2822,6 +2868,8 @@ class cdp_cookies {
 			'Session' => true,
 			'6 months' => true,
 			'13 months' => true,
+			'2 days' => true,
+			'12 hours' => true,
 			'Distinguishes users to compile site usage statistics.' => true,
 			'Maintains session status and Google Analytics 4 metrics.' => true,
 			'Measures conversions and advertising attribution when Google tags are used.' => true,
@@ -2846,6 +2894,12 @@ class cdp_cookies {
 			'Supports LinkedIn advertising and matching of browser identifiers.' => true,
 			'Loads Calendly scheduling widgets and stores interaction state for appointments.' => true,
 			'Loads user avatar images from Gravatar.' => true,
+			'Helps WooCommerce determine when the cart contents or data change.' => true,
+			'Stores a unique customer code used to retrieve cart data from the website database.' => true,
+			'Supports the recently viewed products widget when it is enabled.' => true,
+			'Remembers that the customer dismissed the store notice.' => true,
+			'Records order source attribution during the current browsing session when this feature is enabled.' => true,
+			'Allows the Wordfence firewall to identify authenticated users and check their capabilities before WordPress loads.' => true,
 			'Stores the visitor cookie consent preferences.' => true,
 		);
 

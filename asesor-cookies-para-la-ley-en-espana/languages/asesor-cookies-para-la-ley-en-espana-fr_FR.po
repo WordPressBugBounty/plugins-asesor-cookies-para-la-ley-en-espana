@@ -2,170 +2,186 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Asesor de Cookies RGPD 1.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-07-16 14:26+0200\n"
+"POT-Creation-Date: 2026-07-16 20:18+0200\n"
 "Language: fr_FR\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: lib/plugin.php:1979
+#: lib/plugin.php:1998
 #, php-format
 msgid "%s cookies in inventory"
 msgstr "%s cookies dans l'inventaire"
 
-#: lib/plugin.php:1869
+#: lib/plugin.php:1888
 #, php-format
 msgid "%s may install cookies or load external resources."
 msgstr "%s peut installer des cookies ou charger des ressources externes."
 
-#: lib/plugin.php:2703
+#: lib/plugin.php:2730
 msgid "1 day"
 msgstr ""
 
-#: lib/plugin.php:1720 lib/plugin.php:2702 lib/plugin.php:2710
-#: lib/plugin.php:2762 lib/plugin.php:2763 lib/plugin.php:2777
+#: lib/plugin.php:1739 lib/plugin.php:2729 lib/plugin.php:2737
+#: lib/plugin.php:2789 lib/plugin.php:2790 lib/plugin.php:2804
 msgid "1 year"
 msgstr ""
 
-#: lib/plugin.php:2754 lib/plugin.php:2755
+#: lib/plugin.php:2838
+msgid "12 hours"
+msgstr "12 heures"
+
+#: lib/plugin.php:2781 lib/plugin.php:2782
 msgid "13 months"
 msgstr "13 mois"
 
-#: lib/plugin.php:2679 lib/plugin.php:2680 lib/plugin.php:2726
-#: lib/plugin.php:2770
+#: lib/plugin.php:2828
+msgid "2 days"
+msgstr "2 jours"
+
+#: lib/plugin.php:2706 lib/plugin.php:2707 lib/plugin.php:2753
+#: lib/plugin.php:2797
 msgid "2 years"
 msgstr ""
 
-#: lib/plugin.php:2694 lib/plugin.php:2695 lib/plugin.php:2778
+#: lib/plugin.php:2721 lib/plugin.php:2722 lib/plugin.php:2805
 msgid "3 months"
 msgstr ""
 
-#: lib/plugin.php:2711
+#: lib/plugin.php:2738
 msgid "30 minutes"
 msgstr ""
 
-#: lib/plugin.php:2719 lib/plugin.php:2733 lib/plugin.php:2740
+#: lib/plugin.php:2746 lib/plugin.php:2760 lib/plugin.php:2767
 msgid "6 months"
 msgstr ""
 
-#: lib/plugin.php:2687
+#: lib/plugin.php:2714
 msgid "90 days"
 msgstr ""
 
-#: lib/plugin.php:2170
+#: lib/plugin.php:2193
 msgid ""
 "A cookie policy page already existed. Its URL has been saved as the official "
 "cookie policy page."
 msgstr ""
 
 #. translators: %s: consent category name.
-#: lib/plugin.php:1860
+#: lib/plugin.php:1879
 #, php-format
 msgid "Accept %s cookies and load content"
 msgstr "Accepter les cookies %s et charger le contenu"
 
-#: lib/plugin.php:2076
+#: lib/plugin.php:2099
 msgid "Accept all button"
 msgstr "Bouton tout accepter"
 
-#: lib/plugin.php:2288 lib/plugin.php:2423 lib/plugin.php:2586
+#: lib/plugin.php:2311 lib/plugin.php:2446 lib/plugin.php:2613
 msgid "Actions"
 msgstr "Actions"
 
-#: lib/plugin.php:2273
+#: lib/plugin.php:2296
 msgid "Add cookie/service"
 msgstr "Ajouter cookie/service"
 
-#: lib/plugin.php:2215
+#: lib/plugin.php:2238
 msgid ""
 "Add this shortcode to your cookie policy page to display this inventory:"
 msgstr ""
 "Ajoutez ce shortcode à votre page de politique de cookies pour afficher cet "
 "inventaire :"
 
-#: lib/plugin.php:2466
+#: lib/plugin.php:2489
 msgid "Add to inventory"
 msgstr "Ajouter à l'inventaire"
 
-#: lib/plugin.php:251
+#: lib/plugin.php:265
 msgid "Allow advertising, campaign measurement, or ad personalization."
 msgstr ""
 "Permettent la publicité, la mesure des campagnes ou la personnalisation des "
 "annonces."
 
-#: lib/plugin.php:2443 lib/plugin.php:2517
+#: lib/plugin.php:2838
+msgid ""
+"Allows the Wordfence firewall to identify authenticated users and check "
+"their capabilities before WordPress loads."
+msgstr ""
+"Permet au pare-feu Wordfence d'identifier les utilisateurs authentifiés et "
+"de vérifier leurs droits avant le chargement de WordPress."
+
+#: lib/plugin.php:2466 lib/plugin.php:2544
 msgid "Already declared"
 msgstr "Déjà déclaré"
 
-#: lib/plugin.php:2459
+#: lib/plugin.php:2482
 msgid "Already in inventory"
 msgstr "Déjà dans l'inventaire"
 
-#: lib/plugin.php:241 lib/plugin.php:590
+#: lib/plugin.php:255 lib/plugin.php:604
 msgid "Analytics"
 msgstr "Statistiques"
 
-#: lib/plugin.php:2021
+#: lib/plugin.php:2040
 msgid "Analytics embed"
 msgstr "Contenu intégré d'analyse"
 
-#: lib/plugin.php:324
+#: lib/plugin.php:338
 #, fuzzy
 msgid "Analytics scripts"
 msgstr "Statistiques"
 
-#: lib/plugin.php:1987
+#: lib/plugin.php:2006
 msgid "Assisted audit"
 msgstr "Audit assisté"
 
-#: lib/plugin.php:2644
+#: lib/plugin.php:2671
 msgid "Assisted audit mode"
 msgstr "Mode audit assisté"
 
-#: lib/plugin.php:2383
+#: lib/plugin.php:2406
 msgid "Assisted cookie audit"
 msgstr "Audit assisté des cookies"
 
-#: lib/plugin.php:2390
+#: lib/plugin.php:2413
 msgid "Audit recording"
 msgstr "Enregistrement de l'audit"
 
-#: lib/plugin.php:1984
+#: lib/plugin.php:2003
 msgid "Banner"
 msgstr ""
 
-#: lib/plugin.php:2069
+#: lib/plugin.php:2092
 msgid "Banner button texts"
 msgstr "Textes des boutons de la bannière"
 
-#: lib/plugin.php:2121
+#: lib/plugin.php:2144
 msgid "Bottom"
 msgstr ""
 
-#: lib/plugin.php:2150
+#: lib/plugin.php:2173
 msgid ""
 "Bottom mode uses a horizontal percentage for desktop, tablet, and mobile. "
 "Side modes use the vertical percentage from the middle of the page downward."
 msgstr ""
 
-#: lib/plugin.php:2369
+#: lib/plugin.php:2392
 msgid "Cancel"
 msgstr "Annuler"
 
-#: lib/plugin.php:1893 lib/plugin.php:2250 lib/plugin.php:2284
-#: lib/plugin.php:2344
+#: lib/plugin.php:1912 lib/plugin.php:2273 lib/plugin.php:2307
+#: lib/plugin.php:2367
 msgid "Category"
 msgstr "Catégorie"
 
-#: lib/plugin.php:1974
+#: lib/plugin.php:1993
 msgid "Changes saved successfully."
 msgstr "Modifications enregistrées."
 
-#: lib/plugin.php:2487
+#: lib/plugin.php:2510
 msgid "Clear audit results"
 msgstr "Effacer les résultats de l'audit"
 
-#: lib/plugin.php:2391
+#: lib/plugin.php:2414
 msgid ""
 "Close other tabs for this domain, start recording, browse the public site, "
 "accept the consents you want to test, and stop recording when finished."
@@ -174,109 +190,109 @@ msgstr ""
 "le site public, acceptez les consentements à tester, puis arrêtez "
 "l'enregistrement une fois terminé."
 
-#: lib/plugin.php:2084
+#: lib/plugin.php:2107
 msgid "Configure button"
 msgstr "Bouton configurer"
 
-#: lib/plugin.php:1766
+#: lib/plugin.php:1785
 msgid "Configure cookies"
 msgstr "Configurer les cookies"
 
-#: lib/plugin.php:589
+#: lib/plugin.php:603
 #, fuzzy
 msgid "Consent category"
 msgstr "Catégorie"
 
-#: lib/plugin.php:1978 lib/plugin.php:2669
+#: lib/plugin.php:1997 lib/plugin.php:2696
 msgid "Consent management"
 msgstr "Gestion du consentement"
 
-#: lib/plugin.php:588
+#: lib/plugin.php:602
 #, fuzzy
 msgid "Consent settings"
 msgstr "Enregistrer les réglages"
 
-#: lib/plugin.php:584
+#: lib/plugin.php:598
 msgid "Consent-protected content"
 msgstr ""
 
-#: lib/plugin.php:2581
+#: lib/plugin.php:2608
 msgid "Content"
 msgstr "Contenu"
 
-#: lib/plugin.php:2419 lib/plugin.php:2539
+#: lib/plugin.php:2442 lib/plugin.php:2566
 msgid "Cookie"
 msgstr "Cookie"
 
-#: lib/plugin.php:522 lib/plugin.php:523 lib/plugin.php:532 lib/plugin.php:533
-#: lib/plugin.php:1952
+#: lib/plugin.php:536 lib/plugin.php:537 lib/plugin.php:546 lib/plugin.php:547
+#: lib/plugin.php:1971
 msgid "Cookie Advisor"
 msgstr "Assistant cookies"
 
-#: lib/plugin.php:1969
+#: lib/plugin.php:1988
 msgid "Cookie added to the inventory."
 msgstr "Cookie ajouté à l'inventaire."
 
-#: lib/plugin.php:1270
+#: lib/plugin.php:1285
 msgid "Cookie audit is not available."
 msgstr ""
 
-#: lib/plugin.php:2050
+#: lib/plugin.php:2069
 msgid "Cookie banner"
 msgstr "Bannière de cookies"
 
-#: lib/plugin.php:1265
+#: lib/plugin.php:1280
 msgid "Cookie deleted."
 msgstr "Cookie supprimé."
 
-#: lib/plugin.php:2112
+#: lib/plugin.php:2135
 #, fuzzy
 msgid "Cookie icon"
 msgstr "Politique de cookies"
 
-#: lib/plugin.php:1986 lib/plugin.php:2212
+#: lib/plugin.php:2005 lib/plugin.php:2235
 msgid "Cookie inventory"
 msgstr "Inventaire des cookies"
 
-#: lib/plugin.php:1551 lib/plugin.php:1985 lib/plugin.php:2161
-#: lib/plugin.php:2664
+#: lib/plugin.php:1570 lib/plugin.php:2004 lib/plugin.php:2184
+#: lib/plugin.php:2691
 msgid "Cookie policy"
 msgstr "Politique de cookies"
 
-#: lib/plugin.php:2093 lib/plugin.php:2187
+#: lib/plugin.php:2116 lib/plugin.php:2210
 msgid "Cookie policy page URL"
 msgstr "URL de la page de politique de cookies"
 
-#: lib/plugin.php:2168
+#: lib/plugin.php:2191
 msgid ""
 "Cookie policy page created. Its URL has been saved as the official cookie "
 "policy page."
 msgstr ""
 
-#: lib/plugin.php:1795
+#: lib/plugin.php:1814
 #, fuzzy
 msgid "Cookie settings"
 msgstr "Enregistrer les réglages"
 
-#: lib/plugin.php:1800
+#: lib/plugin.php:1819
 #, fuzzy
 msgid "Cookies"
 msgstr "Assistant cookies"
 
-#: lib/plugin.php:1369
+#: lib/plugin.php:1384
 #, fuzzy
 msgid "Cookies detected."
 msgstr "Cookie supprimé."
 
-#: lib/plugin.php:2666
+#: lib/plugin.php:2693
 msgid "Cookies used"
 msgstr "Cookies utilisés"
 
-#: lib/plugin.php:2205
+#: lib/plugin.php:2228
 msgid "Create cookie policy page"
 msgstr "Créer la page de politique de cookies"
 
-#: lib/plugin.php:2214
+#: lib/plugin.php:2237
 msgid ""
 "Declaring cookies does not block cookies; to block them, you must control "
 "the code that creates them. Service patterns help connect detected external "
@@ -286,7 +302,7 @@ msgstr ""
 "devez contrôler le code qui les crée. Les modèles de service aident à relier "
 "les domaines externes détectés aux services déclarés dans cet inventaire."
 
-#: lib/plugin.php:2029
+#: lib/plugin.php:2048
 #, fuzzy
 msgid ""
 "Declaring cookies in the inventory documents them, but it does not block "
@@ -295,19 +311,19 @@ msgstr ""
 "Déclarer des cookies ne bloque pas les cookies ; pour les bloquer, vous "
 "devez contrôler le code qui les crée."
 
-#: lib/plugin.php:2315
+#: lib/plugin.php:2338
 msgid "Delete cookie"
 msgstr "Supprimer le cookie"
 
-#: lib/plugin.php:562
+#: lib/plugin.php:576
 msgid "Delete this cookie?"
 msgstr "Supprimer ce cookie ?"
 
-#: lib/plugin.php:2134
+#: lib/plugin.php:2157
 msgid "Desktop horizontal %"
 msgstr ""
 
-#: lib/plugin.php:1998
+#: lib/plugin.php:2017
 #, fuzzy
 msgid ""
 "Detection helps you complete the cookie policy with the cookies and external "
@@ -328,71 +344,75 @@ msgstr ""
 "externes et déclarer manuellement les cookies trouvés avec l'aide de l'audit "
 "assisté."
 
-#: lib/plugin.php:2420 lib/plugin.php:2499
+#: lib/plugin.php:2443 lib/plugin.php:2522
 msgid "Detections"
 msgstr "Détections"
 
-#: lib/plugin.php:2679
+#: lib/plugin.php:2706
 msgid "Distinguishes users to compile site usage statistics."
 msgstr ""
 
-#: lib/plugin.php:2496
+#: lib/plugin.php:2519
 msgid "Domain"
 msgstr ""
 
-#: lib/plugin.php:1894 lib/plugin.php:2265 lib/plugin.php:2286
-#: lib/plugin.php:2359
+#: lib/plugin.php:1913 lib/plugin.php:2288 lib/plugin.php:2309
+#: lib/plugin.php:2382
 msgid "Duration"
 msgstr "Durée"
 
-#: lib/plugin.php:2609
+#: lib/plugin.php:2636
 msgid "Edit"
 msgstr "Modifier"
 
-#: lib/plugin.php:2308
+#: lib/plugin.php:2331
 msgid "Edit cookie"
 msgstr "Modifier le cookie"
 
-#: lib/plugin.php:2001
+#: lib/plugin.php:2020
 msgid "Embeds"
 msgstr "Contenus intégrés"
 
-#: lib/plugin.php:2719
+#: lib/plugin.php:2746
 msgid "Estimates bandwidth and playback preferences."
 msgstr ""
 
-#: lib/plugin.php:2006
+#: lib/plugin.php:2087
+msgid "Example of a manually positioned link:"
+msgstr "Exemple de lien placé manuellement :"
+
+#: lib/plugin.php:2025
 msgid "Examples"
 msgstr "Exemples"
 
-#: lib/plugin.php:586 lib/plugin.php:619 lib/plugin.php:1824
-#: lib/plugin.php:1843
+#: lib/plugin.php:600 lib/plugin.php:633 lib/plugin.php:1843
+#: lib/plugin.php:1862
 msgid "External content"
 msgstr "Contenu externe"
 
-#: lib/plugin.php:587 lib/plugin.php:623 lib/plugin.php:1825
-#: lib/plugin.php:1844
+#: lib/plugin.php:601 lib/plugin.php:637 lib/plugin.php:1844
+#: lib/plugin.php:1863
 msgid "External content blocked"
 msgstr "Contenu externe bloqué"
 
-#: lib/plugin.php:2489
+#: lib/plugin.php:2512
 msgid "External services detected during recording"
 msgstr "Services externes détectés pendant l'enregistrement"
 
-#: lib/plugin.php:2422 lib/plugin.php:2500
+#: lib/plugin.php:2445 lib/plugin.php:2523
 msgid "First page"
 msgstr "Première page"
 
-#: lib/plugin.php:1903 lib/plugin.php:2260 lib/plugin.php:2302
-#: lib/plugin.php:2354
+#: lib/plugin.php:1922 lib/plugin.php:2283 lib/plugin.php:2325
+#: lib/plugin.php:2377
 msgid "First-party"
 msgstr "Interne"
 
-#: lib/plugin.php:2013
+#: lib/plugin.php:2032
 msgid "Google Maps map"
 msgstr "Carte Google Maps"
 
-#: lib/plugin.php:2762
+#: lib/plugin.php:2789
 msgid ""
 "Groups actions for Pinterest advertising and analytics when the visitor is "
 "not logged in."
@@ -400,28 +420,32 @@ msgstr ""
 "Regroupe les actions pour la publicité et l'analyse Pinterest lorsque le "
 "visiteur n'est pas connecté."
 
-#: lib/plugin.php:2703
+#: lib/plugin.php:2730
 msgid "Groups several page views into the same user session."
 msgstr ""
 
-#: lib/plugin.php:1029 lib/plugin.php:1232
+#: lib/plugin.php:1043 lib/plugin.php:1247
 msgid "HTML embed tag"
 msgstr "Balise HTML d'intégration"
 
-#: lib/plugin.php:250
+#: lib/plugin.php:264
 msgid "Help measure site usage and improve its content."
 msgstr "Aident à mesurer l'utilisation du site et à améliorer son contenu."
 
-#: lib/plugin.php:2740
+#: lib/plugin.php:2826 lib/plugin.php:2827
+msgid "Helps WooCommerce determine when the cart contents or data change."
+msgstr "Aide WooCommerce à déterminer quand le contenu ou les données du panier changent."
+
+#: lib/plugin.php:2767
 msgid "Helps protect forms against spam and automated abuse."
 msgstr ""
 "Aide à protéger les formulaires contre le spam et les abus automatisés."
 
-#: lib/plugin.php:1995
+#: lib/plugin.php:2014
 msgid "How to use this plugin"
 msgstr ""
 
-#: lib/plugin.php:2777
+#: lib/plugin.php:2804
 msgid ""
 "Identifies browsers for LinkedIn embedded content and advertising "
 "measurement."
@@ -429,72 +453,72 @@ msgstr ""
 "Identifie les navigateurs pour le contenu intégré LinkedIn et la mesure "
 "publicitaire."
 
-#: lib/plugin.php:2694
+#: lib/plugin.php:2721
 msgid "Identifies browsers for advertising measurement and remarketing."
 msgstr ""
 
-#: lib/plugin.php:2206
+#: lib/plugin.php:2229
 msgid ""
 "If this admin page has been open for many hours, reload it before creating "
 "the page to refresh the security token."
 msgstr ""
 
-#: lib/plugin.php:2190
+#: lib/plugin.php:2213
 msgid "If you already have a cookie policy page, paste its URL here."
 msgstr ""
 "Si vous avez déjà une page de politique de cookies, collez son URL ici."
 
-#: lib/plugin.php:2467 lib/plugin.php:2475
+#: lib/plugin.php:2490 lib/plugin.php:2498
 msgid "Ignore"
 msgstr "Ignorer"
 
-#: lib/plugin.php:2534
+#: lib/plugin.php:2561
 msgid "Ignored cookies"
 msgstr "Cookies ignorés"
 
-#: lib/plugin.php:2540
+#: lib/plugin.php:2567
 msgid "Ignored on"
 msgstr "Ignoré le"
 
-#: lib/plugin.php:2710
+#: lib/plugin.php:2737
 msgid "Keeps a user identifier for experience analytics."
 msgstr ""
 
-#: lib/plugin.php:2711
+#: lib/plugin.php:2738
 msgid "Keeps session data for navigation analysis."
 msgstr ""
 
-#: lib/plugin.php:1049 lib/plugin.php:1236
+#: lib/plugin.php:1063 lib/plugin.php:1251
 msgid "Known external service URL"
 msgstr "URL de service externe connu"
 
-#: lib/plugin.php:2396
+#: lib/plugin.php:2419
 #, php-format
 msgid "Last recording stopped: %s"
 msgstr "Dernier enregistrement arrêté : %s"
 
-#: lib/plugin.php:2573
+#: lib/plugin.php:2600
 #, php-format
 msgid "Last scan: %s"
 msgstr "Dernier scan : %s"
 
-#: lib/plugin.php:2421 lib/plugin.php:2541
+#: lib/plugin.php:2444 lib/plugin.php:2568
 msgid "Last seen"
 msgstr "Dernière détection"
 
-#: lib/plugin.php:2129
+#: lib/plugin.php:2152
 msgid "Left side"
 msgstr ""
 
-#: lib/plugin.php:1960
+#: lib/plugin.php:1979
 msgid "Library service or cookie added to the inventory."
 msgstr "Service ou cookie de la bibliothèque ajouté à l'inventaire."
 
-#: lib/plugin.php:2098
+#: lib/plugin.php:2121
 msgid "Link to reopen the cookie banner"
 msgstr "Lien pour rouvrir la bannière de cookies"
 
-#: lib/plugin.php:2038
+#: lib/plugin.php:2057
 msgid ""
 "Loaded only if the visitor accepts this category. Do not paste scripts "
 "required for basic website functionality here."
@@ -502,7 +526,7 @@ msgstr ""
 "Chargé uniquement si le visiteur accepte cette catégorie. Ne collez pas ici "
 "les scripts nécessaires au fonctionnement de base du site."
 
-#: lib/plugin.php:2785
+#: lib/plugin.php:2812
 msgid ""
 "Loads Calendly scheduling widgets and stores interaction state for "
 "appointments."
@@ -510,7 +534,7 @@ msgstr ""
 "Charge les widgets de planification Calendly et enregistre l'état "
 "d'interaction pour les rendez-vous."
 
-#: lib/plugin.php:2747
+#: lib/plugin.php:2774
 msgid ""
 "Loads Instagram embedded content and may support social interaction or "
 "advertising measurement."
@@ -518,73 +542,73 @@ msgstr ""
 "Charge le contenu intégré d'Instagram et peut permettre l'interaction "
 "sociale ou la mesure publicitaire."
 
-#: lib/plugin.php:2792
+#: lib/plugin.php:2819
 msgid "Loads user avatar images from Gravatar."
 msgstr "Charge les images d’avatar utilisateur depuis Gravatar."
 
-#: lib/plugin.php:2680
+#: lib/plugin.php:2707
 msgid "Maintains session status and Google Analytics 4 metrics."
 msgstr ""
 
-#: lib/plugin.php:1953
+#: lib/plugin.php:1972
 msgid ""
 "Manage consent, declare the cookies used by this site, and load non-"
 "essential scripts only after visitor consent."
 msgstr ""
 
-#: lib/plugin.php:242 lib/plugin.php:591
+#: lib/plugin.php:256 lib/plugin.php:605
 msgid "Marketing"
 msgstr "Marketing"
 
-#: lib/plugin.php:2017
+#: lib/plugin.php:2036
 msgid "Marketing embed"
 msgstr "Contenu intégré marketing"
 
-#: lib/plugin.php:325
+#: lib/plugin.php:339
 #, fuzzy
 msgid "Marketing scripts"
 msgstr "Marketing"
 
-#: lib/plugin.php:2754
+#: lib/plugin.php:2781
 msgid ""
 "Measures advertising performance and user interaction with TikTok content."
 msgstr ""
 "Mesure les performances publicitaires et l'interaction avec le contenu "
 "TikTok."
 
-#: lib/plugin.php:2687
+#: lib/plugin.php:2714
 msgid ""
 "Measures conversions and advertising attribution when Google tags are used."
 msgstr ""
 
-#: lib/plugin.php:2629
+#: lib/plugin.php:2656
 msgid "Menu location"
 msgstr "Emplacement du menu"
 
-#: lib/plugin.php:2142
+#: lib/plugin.php:2165
 msgid "Mobile horizontal %"
 msgstr ""
 
-#: lib/plugin.php:2027
+#: lib/plugin.php:2046
 msgid ""
 "Move every script on your website that installs cookies into this plugin. "
 "Paste each script in its consent category so it only loads after the visitor "
 "accepts it."
 msgstr ""
 
-#: lib/plugin.php:2237 lib/plugin.php:2332
+#: lib/plugin.php:2260 lib/plugin.php:2355
 msgid "Name"
 msgstr "Nom"
 
-#: lib/plugin.php:240
+#: lib/plugin.php:254
 msgid "Necessary"
 msgstr "Nécessaires"
 
-#: lib/plugin.php:2428
+#: lib/plugin.php:2451
 msgid "No audited cookies have been detected yet."
 msgstr "Aucun cookie audité n'a encore été détecté."
 
-#: lib/plugin.php:2176
+#: lib/plugin.php:2199
 msgid ""
 "No cookie policy page URL has been configured yet. Create the page "
 "automatically or paste the URL of an existing cookie policy page."
@@ -593,28 +617,32 @@ msgstr ""
 "la page automatiquement ou collez l'URL d'une page de politique de cookies "
 "existante."
 
-#: lib/plugin.php:1280
+#: lib/plugin.php:2540
+msgid "No cookies"
+msgstr "Aucun cookie"
+
+#: lib/plugin.php:1295
 #, fuzzy
 msgid "No cookies detected."
 msgstr "Cookie supprimé."
 
-#: lib/plugin.php:2591
+#: lib/plugin.php:2618
 msgid "No embed scan results yet."
 msgstr "Aucun résultat d'analyse des intégrations pour le moment."
 
-#: lib/plugin.php:2505
+#: lib/plugin.php:2528
 msgid "No external services have been detected during the current recording."
 msgstr "Aucun service externe n'a été détecté pendant l'enregistrement actuel."
 
-#: lib/plugin.php:1918
+#: lib/plugin.php:1937
 msgid "Not protected"
 msgstr "Non protégé"
 
-#: lib/plugin.php:2056
+#: lib/plugin.php:2075
 msgid "Notice shown to the visitor"
 msgstr "Avis affiché au visiteur"
 
-#: lib/plugin.php:2665
+#: lib/plugin.php:2692
 msgid ""
 "On this website we use first-party and third-party cookies to ensure its "
 "operation, measure site usage and, where applicable, show content or "
@@ -625,86 +653,98 @@ msgstr ""
 "des contenus ou communications selon les préférences acceptées par "
 "l'utilisateur."
 
-#: lib/plugin.php:326
+#: lib/plugin.php:340
 #, fuzzy
 msgid "Other scripts"
 msgstr "Enregistrer les scripts"
 
-#: lib/plugin.php:243 lib/plugin.php:592
+#: lib/plugin.php:257 lib/plugin.php:606
 msgid "Personalization"
 msgstr "Personnalisation"
 
-#: lib/plugin.php:595
+#: lib/plugin.php:609
 msgid "Place the video, map, iframe, or external embed inside this container."
 msgstr ""
 
-#: lib/plugin.php:594
+#: lib/plugin.php:608
 msgid "Placeholder title"
 msgstr ""
 
-#: lib/plugin.php:1492
+#: lib/plugin.php:1511
 msgid ""
 "Possible Sourcebuster/WooCommerce cookie from another local environment."
 msgstr ""
 "Cookie Sourcebuster/WooCommerce possible provenant d'un autre environnement "
 "local."
 
-#: lib/plugin.php:1488
+#: lib/plugin.php:1507
 msgid "Possible cookie from another consent plugin or previous tests."
 msgstr ""
 "Cookie possible d'un autre plugin de consentement ou de tests précédents."
 
-#: lib/plugin.php:1496
+#: lib/plugin.php:1515
 msgid ""
 "Possible technical cookie from WordPress, another plugin, or previous tests."
 msgstr ""
 "Cookie technique possible de WordPress, d'un autre plugin ou de tests "
 "précédents."
 
-#: lib/plugin.php:2116
+#: lib/plugin.php:2139
 msgid "Preferences button position"
 msgstr ""
 
-#: lib/plugin.php:2104
+#: lib/plugin.php:2127
 msgid "Preferences button style"
 msgstr ""
 
-#: lib/plugin.php:1917
+#: lib/plugin.php:1936
 msgid "Protected"
 msgstr "Protégé"
 
-#: lib/plugin.php:1988 lib/plugin.php:2562
+#: lib/plugin.php:2007 lib/plugin.php:2589
 msgid "Protected embeds"
 msgstr "Intégrations protégées"
 
-#: lib/plugin.php:1891 lib/plugin.php:2241 lib/plugin.php:2282
-#: lib/plugin.php:2336
+#: lib/plugin.php:1910 lib/plugin.php:2264 lib/plugin.php:2305
+#: lib/plugin.php:2359
 msgid "Provider"
 msgstr "Fournisseur"
 
-#: lib/plugin.php:1895 lib/plugin.php:2269 lib/plugin.php:2287
-#: lib/plugin.php:2363
+#: lib/plugin.php:1914 lib/plugin.php:2292 lib/plugin.php:2310
+#: lib/plugin.php:2386
 msgid "Purpose"
 msgstr "Finalité"
 
-#: lib/plugin.php:2649
+#: lib/plugin.php:2676
 msgid ""
 "Record visible cookie names while administrators browse the public website."
 msgstr ""
 
-#: lib/plugin.php:2393
+#: lib/plugin.php:2416
 msgid "Recording active"
 msgstr "Enregistrement actif"
 
-#: lib/plugin.php:2718
+#: lib/plugin.php:2831
+msgid ""
+"Records order source attribution during the current browsing session when "
+"this feature is enabled."
+msgstr ""
+"Enregistre l'attribution de la source de la commande pendant la session de "
+"navigation en cours lorsque cette fonction est activée."
+
+#: lib/plugin.php:2745
 msgid "Records playback of embedded videos."
 msgstr ""
 
-#: lib/plugin.php:2080
+#: lib/plugin.php:2103
 msgid "Reject button"
 msgstr "Bouton refuser"
 
-#: lib/plugin.php:249
+#: lib/plugin.php:2830
+msgid "Remembers that the customer dismissed the store notice."
+msgstr "Mémorise que le client a fermé l'avis de la boutique."
+
+#: lib/plugin.php:263
 msgid ""
 "Required for the website to work correctly. They cannot be disabled from "
 "this panel."
@@ -712,51 +752,51 @@ msgstr ""
 "Nécessaires au bon fonctionnement du site. Ils ne peuvent pas être "
 "désactivés depuis ce panneau."
 
-#: lib/plugin.php:2497
+#: lib/plugin.php:2520
 msgid "Resource"
 msgstr ""
 
-#: lib/plugin.php:2446
+#: lib/plugin.php:2469
 msgid "Review"
 msgstr "Vérifier"
 
-#: lib/plugin.php:1919
+#: lib/plugin.php:1938
 msgid "Review manually"
 msgstr "Vérifier manuellement"
 
-#: lib/plugin.php:1499
+#: lib/plugin.php:1518
 msgid "Review manually before adding it to the inventory."
 msgstr "Vérifiez-la manuellement avant de l'ajouter à l'inventaire."
 
-#: lib/plugin.php:2125
+#: lib/plugin.php:2148
 msgid "Right side"
 msgstr ""
 
-#: lib/plugin.php:1786 lib/plugin.php:2154
+#: lib/plugin.php:1805 lib/plugin.php:2177
 msgid "Save configuration"
 msgstr "Enregistrer la configuration"
 
-#: lib/plugin.php:2368
+#: lib/plugin.php:2391
 msgid "Save cookie"
 msgstr "Enregistrer le cookie"
 
-#: lib/plugin.php:2193
+#: lib/plugin.php:2216
 msgid "Save policy URL"
 msgstr "Enregistrer l'URL de la politique"
 
-#: lib/plugin.php:2043
+#: lib/plugin.php:2062
 msgid "Save scripts"
 msgstr "Enregistrer les scripts"
 
-#: lib/plugin.php:2655
+#: lib/plugin.php:2682
 msgid "Save settings"
 msgstr "Enregistrer les réglages"
 
-#: lib/plugin.php:2571
+#: lib/plugin.php:2598
 msgid "Scan embeds"
 msgstr "Scanner les intégrations"
 
-#: lib/plugin.php:329 lib/plugin.php:2026
+#: lib/plugin.php:343 lib/plugin.php:2045
 msgid "Scripts"
 msgstr "Scripts"
 
@@ -765,126 +805,135 @@ msgstr "Scripts"
 msgid "Se requiere un valor para %s"
 msgstr ""
 
-#: lib/plugin.php:2224
+#: lib/plugin.php:2247
 msgid "Select a service to fill the form"
 msgstr "Sélectionnez un service pour remplir le formulaire"
 
-#: lib/plugin.php:2495 lib/plugin.php:2582
+#: lib/plugin.php:2518 lib/plugin.php:2609
 msgid "Service"
 msgstr "Service"
 
-#: lib/plugin.php:2222
+#: lib/plugin.php:2245
 msgid "Service library"
 msgstr "Bibliothèque de services"
 
-#: lib/plugin.php:593
+#: lib/plugin.php:607
 #, fuzzy
 msgid "Service name"
 msgstr "Service"
 
-#: lib/plugin.php:2283
+#: lib/plugin.php:2306
 msgid "Service pattern"
 msgstr "Modèle de service"
 
-#: lib/plugin.php:2245 lib/plugin.php:2340
+#: lib/plugin.php:2268 lib/plugin.php:2363
 msgid "Service/domain pattern"
 msgstr "Modèle service/domaine"
 
-#: lib/plugin.php:2718 lib/plugin.php:2747 lib/plugin.php:2785
-#: lib/plugin.php:2792
+#: lib/plugin.php:2745 lib/plugin.php:2774 lib/plugin.php:2812
+#: lib/plugin.php:2819 lib/plugin.php:2826 lib/plugin.php:2827
+#: lib/plugin.php:2829 lib/plugin.php:2830 lib/plugin.php:2831
 msgid "Session"
 msgstr ""
 
-#: lib/plugin.php:511 lib/plugin.php:1989 lib/plugin.php:2623
+#: lib/plugin.php:525 lib/plugin.php:2008 lib/plugin.php:2650
 msgid "Settings"
 msgstr "Réglages"
 
-#: lib/plugin.php:2638
+#: lib/plugin.php:2665
 msgid "Show Cookie Advisor as a submenu under Tools"
 msgstr "Afficher Assistant cookies comme sous-menu dans Outils"
 
-#: lib/plugin.php:2633
+#: lib/plugin.php:2660
 msgid "Show Cookie Advisor in the main WordPress menu"
 msgstr "Afficher Assistant cookies dans le menu principal de WordPress"
 
-#: lib/plugin.php:2146
+#: lib/plugin.php:2169
 msgid "Side vertical %"
 msgstr ""
 
-#: lib/plugin.php:2583
+#: lib/plugin.php:2610
 msgid "Signal"
 msgstr "Signal"
 
-#: lib/plugin.php:2585
+#: lib/plugin.php:2612
 msgid "Snippet"
 msgstr "Extrait"
 
-#: lib/plugin.php:1983
+#: lib/plugin.php:2002
 msgid "Start"
 msgstr ""
 
-#: lib/plugin.php:2404
+#: lib/plugin.php:2427
 msgid "Start recording"
 msgstr "Démarrer l'enregistrement"
 
-#: lib/plugin.php:2394
+#: lib/plugin.php:2417
 #, php-format
 msgid "Started: %s"
 msgstr "Démarré : %s"
 
-#: lib/plugin.php:2584
+#: lib/plugin.php:2611
 msgid "Status"
 msgstr "État"
 
-#: lib/plugin.php:2410
+#: lib/plugin.php:2433
 msgid "Stop recording"
 msgstr "Arrêter l'enregistrement"
 
-#: lib/plugin.php:252
+#: lib/plugin.php:266
 msgid "Store preferences or enable non-essential external content."
 msgstr ""
 "Enregistrent des préférences ou activent du contenu externe non essentiel."
 
-#: lib/plugin.php:2755
+#: lib/plugin.php:2782
 msgid "Stores TikTok advertising click information for attribution."
 msgstr ""
 "Enregistre les informations de clic publicitaire TikTok pour l'attribution."
 
-#: lib/plugin.php:2702
+#: lib/plugin.php:2729
 msgid "Stores a Clarity user identifier for behavior analysis."
 msgstr ""
 
-#: lib/plugin.php:2726
+#: lib/plugin.php:2753
 msgid ""
 "Stores a Vimeo user identifier for embedded video playback and analytics."
 msgstr ""
 "Enregistre un identifiant utilisateur Vimeo pour la lecture de vidéos "
 "intégrées et l'analyse."
 
-#: lib/plugin.php:2695
+#: lib/plugin.php:2828
+msgid ""
+"Stores a unique customer code used to retrieve cart data from the website "
+"database."
+msgstr ""
+"Stocke un code client unique permettant de récupérer les données du panier "
+"dans la base de données du site."
+
+#: lib/plugin.php:2722
 msgid "Stores information from Facebook ad clicks."
 msgstr ""
 
-#: lib/plugin.php:2733
+#: lib/plugin.php:2760
 msgid "Stores preferences and information linked to Google services."
 msgstr ""
 
-#: lib/plugin.php:1721
+#: lib/plugin.php:1740
 msgid "Stores the visitor cookie consent preferences."
 msgstr "Enregistre les préférences de consentement aux cookies du visiteur."
 
-#: lib/plugin.php:2778
+#: lib/plugin.php:2805
 msgid "Supports LinkedIn advertising and matching of browser identifiers."
 msgstr ""
 "Permet la publicité LinkedIn et la correspondance des identifiants de "
 "navigateur."
 
-#: lib/plugin.php:2763
+#: lib/plugin.php:2790
 msgid "Supports Pinterest conversion tracking and advertising measurement."
 msgstr ""
 "Permet le suivi des conversions et la mesure publicitaire de Pinterest."
 
-#: lib/plugin.php:2770
+#: lib/plugin.php:2797
 msgid ""
 "Supports embedded timelines, social interaction, and advertising "
 "personalization."
@@ -892,23 +941,35 @@ msgstr ""
 "Permet les fils intégrés, l'interaction sociale et la personnalisation "
 "publicitaire."
 
-#: lib/plugin.php:1064
+#: lib/plugin.php:2829
+msgid "Supports the recently viewed products widget when it is enabled."
+msgstr "Prend en charge le widget des produits récemment consultés lorsqu'il est activé."
+
+#: lib/plugin.php:1078
 msgid "Suspicious shortcode"
 msgstr "Shortcode suspect"
 
-#: lib/plugin.php:2138
+#: lib/plugin.php:2161
 msgid "Tablet horizontal %"
 msgstr ""
 
-#: lib/plugin.php:2108
+#: lib/plugin.php:1483
+msgid ""
+"Technical Wordfence cookie for authenticated users. Its detection does not "
+"mean that anonymous visitors receive it."
+msgstr ""
+"Cookie technique Wordfence destiné aux utilisateurs authentifiés. Sa "
+"détection ne signifie pas que les visiteurs anonymes le reçoivent."
+
+#: lib/plugin.php:2131
 msgid "Text"
 msgstr ""
 
-#: lib/plugin.php:1967
+#: lib/plugin.php:1986
 msgid "That cookie is already in the inventory. No duplicate was added."
 msgstr "Ce cookie est déjà dans l'inventaire. Aucun doublon n'a été ajouté."
 
-#: lib/plugin.php:1958
+#: lib/plugin.php:1977
 msgid ""
 "That library service or cookie is already in the inventory. No duplicate was "
 "added."
@@ -916,14 +977,14 @@ msgstr ""
 "Ce service ou cookie de la bibliothèque est déjà dans l'inventaire. Aucun "
 "doublon n'a été ajouté."
 
-#: lib/plugin.php:2386
+#: lib/plugin.php:2409
 msgid ""
 "The audit reads document.cookie on the current domain. Browser extensions "
 "normally cannot be read, but an extension or injected script could create "
 "cookies on this website and appear in the results."
 msgstr ""
 
-#: lib/plugin.php:2004
+#: lib/plugin.php:2023
 msgid ""
 "The category attribute is technical and must use one of these fixed values: "
 "necessary, analytics, marketing, personalization. For external embeds, "
@@ -939,11 +1000,11 @@ msgstr ""
 "essentiel. L'attribut service est uniquement le nom visible du fournisseur "
 "affiché aux visiteurs, par exemple YouTube, Google Maps ou Vimeo."
 
-#: lib/plugin.php:2640
+#: lib/plugin.php:2667
 msgid "The change will apply after reloading the admin."
 msgstr "Le changement s'appliquera après le rechargement de l'administration."
 
-#: lib/plugin.php:2182
+#: lib/plugin.php:2205
 msgid ""
 "The configured cookie policy URL could not be checked. Open it manually and "
 "confirm that it exists."
@@ -951,7 +1012,7 @@ msgstr ""
 "L'URL de politique de cookies configurée n'a pas pu être vérifiée. Ouvrez-la "
 "manuellement et confirmez qu'elle existe."
 
-#: lib/plugin.php:2180
+#: lib/plugin.php:2203
 msgid ""
 "The configured cookie policy URL is not valid. Paste a complete URL or "
 "create the page automatically."
@@ -959,7 +1020,7 @@ msgstr ""
 "L'URL de politique de cookies configurée n'est pas valide. Collez une URL "
 "complète ou créez la page automatiquement."
 
-#: lib/plugin.php:2178
+#: lib/plugin.php:2201
 msgid ""
 "The configured cookie policy page was not found. Create the page "
 "automatically or paste the URL of an existing cookie policy page."
@@ -967,26 +1028,35 @@ msgstr ""
 "La page de politique de cookies configurée est introuvable. Créez la page "
 "automatiquement ou collez l'URL d'une page de politique de cookies existante."
 
-#: lib/plugin.php:1971
+#: lib/plugin.php:1990
 msgid "The cookie could not be added."
 msgstr "Le cookie n'a pas pu être ajouté."
 
-#: lib/plugin.php:561 lib/plugin.php:1253 lib/plugin.php:1262
+#: lib/plugin.php:575 lib/plugin.php:1268 lib/plugin.php:1277
 msgid "The cookie could not be deleted."
 msgstr "Le cookie n'a pas pu être supprimé."
 
-#: lib/plugin.php:2172
+#: lib/plugin.php:2195
 msgid ""
 "The cookie policy page could not be created. Please create it manually and "
 "paste its URL here."
 msgstr ""
 
-#: lib/plugin.php:2667
+#: lib/plugin.php:2541
+msgid ""
+"The external request transmits technical data such as the visitor IP "
+"address. Review the privacy policy or host the fonts locally."
+msgstr ""
+"La requête externe transmet des données techniques telles que l'adresse IP "
+"du visiteur. Vérifiez la politique de confidentialité ou hébergez les "
+"polices localement."
+
+#: lib/plugin.php:2694
 msgid "The following table shows the cookies we use on this website."
 msgstr ""
 "Le tableau suivant présente les cookies que nous utilisons sur ce site."
 
-#: lib/plugin.php:2234
+#: lib/plugin.php:2257
 msgid ""
 "The library is organized by services. Each service may suggest one or more "
 "cookies and an external domain pattern."
@@ -994,7 +1064,7 @@ msgstr ""
 "La bibliothèque est organisée par services. Chaque service peut suggérer un "
 "ou plusieurs cookies et un modèle de domaine externe."
 
-#: lib/plugin.php:2202
+#: lib/plugin.php:2225
 msgid ""
 "The page created by the plugin includes this shortcode automatically. If you "
 "already have a cookie policy page, add it where the cookie list should "
@@ -1004,12 +1074,12 @@ msgstr ""
 "disposez déjà d'une page de politique de cookies, ajoutez-le à l'endroit où "
 "la liste des cookies doit apparaître :"
 
-#: lib/plugin.php:1962
+#: lib/plugin.php:1981
 msgid "The selected library service or cookie could not be added."
 msgstr ""
 "Le service ou cookie sélectionné dans la bibliothèque n'a pas pu être ajouté."
 
-#: lib/plugin.php:2204
+#: lib/plugin.php:2227
 msgid ""
 "The table will always show the cookies currently declared in the inventory "
 "and will update automatically when the inventory changes."
@@ -1017,36 +1087,36 @@ msgstr ""
 "Le tableau affichera toujours les cookies actuellement déclarés dans "
 "l'inventaire et se mettra à jour automatiquement lorsque celui-ci changera."
 
-#: lib/plugin.php:1882 lib/plugin.php:2293
+#: lib/plugin.php:1901 lib/plugin.php:2316
 msgid "There are no declared cookies yet."
 msgstr "Aucun cookie n'est encore déclaré."
 
-#: lib/plugin.php:2546
+#: lib/plugin.php:2573
 msgid "There are no ignored cookies."
 msgstr "Il n'y a aucun cookie ignoré."
 
-#: lib/plugin.php:2490
+#: lib/plugin.php:2513
 msgid ""
 "These are external domains loaded by the page. They do not prove which "
-"cookies were installed, but they help identify services that may need "
-"consent and inventory declaration."
+"cookies were installed. Review each service for privacy purposes and add it "
+"to the cookie inventory only when it uses cookies."
 msgstr ""
 "Ce sont les domaines externes chargés par la page. Ils ne prouvent pas quels "
-"cookies ont été installés, mais ils aident à identifier les services pouvant "
-"nécessiter un consentement et une déclaration dans l'inventaire."
+"cookies ont été installés. Examinez chaque service du point de vue de la vie "
+"privée et ne l'ajoutez à l'inventaire que s'il utilise des cookies."
 
-#: lib/plugin.php:2090
+#: lib/plugin.php:2113
 msgid "These labels are shown in the main cookie banner for each language."
 msgstr ""
 "Ces libellés sont affichés dans la bannière principale de cookies pour "
 "chaque langue."
 
-#: lib/plugin.php:1903 lib/plugin.php:2261 lib/plugin.php:2302
-#: lib/plugin.php:2355
+#: lib/plugin.php:1922 lib/plugin.php:2284 lib/plugin.php:2325
+#: lib/plugin.php:2378
 msgid "Third-party"
 msgstr "Tiers"
 
-#: lib/plugin.php:2387
+#: lib/plugin.php:2410
 msgid ""
 "Third-party cookies created inside embeds such as YouTube may be stored on "
 "Google or YouTube domains and cannot be read from this website with "
@@ -1058,13 +1128,13 @@ msgstr ""
 "depuis ce site avec document.cookie. Utilisez le scanner d'intégrations et "
 "la bibliothèque de cookies pour déclarer ces services."
 
-#: lib/plugin.php:2651
+#: lib/plugin.php:2678
 msgid ""
 "This mode does not detect HttpOnly cookies or guarantee legal "
 "classification. It is a semi-automatic tool to make cookie detection easier."
 msgstr ""
 
-#: lib/plugin.php:2028
+#: lib/plugin.php:2047
 msgid ""
 "This plugin guarantees that scripts configured in these fields only load "
 "after the matching consent. The website owner must remove any other copy of "
@@ -1075,7 +1145,7 @@ msgstr ""
 "toute autre copie de ces scripts chargée par le thème, un autre plugin, un "
 "builder ou du code personnalisé."
 
-#: lib/plugin.php:1997
+#: lib/plugin.php:2016
 msgid ""
 "This plugin has two main functions: helping you detect cookies and helping "
 "you block them until the visitor gives consent."
@@ -1084,7 +1154,7 @@ msgstr ""
 "et vous aider à les bloquer jusqu'à ce que le visiteur donne son "
 "consentement."
 
-#: lib/plugin.php:2566
+#: lib/plugin.php:2593
 msgid ""
 "This tool helps locate possible external embeds and check whether they are "
 "wrapped with the consent shortcode. It does not guarantee detecting all "
@@ -1101,11 +1171,11 @@ msgstr ""
 "supervision manuelle du propriétaire du site ou d'un professionnel "
 "spécialisé en protection des données."
 
-#: lib/plugin.php:1716
+#: lib/plugin.php:1735
 msgid "This website"
 msgstr "Ce site web"
 
-#: lib/plugin.php:1999
+#: lib/plugin.php:2018
 msgid ""
 "To show the cookie inventory on your cookie policy page, add this shortcode "
 "where the cookie list should appear:"
@@ -1113,16 +1183,16 @@ msgstr ""
 "Pour afficher l'inventaire sur votre page de politique de cookies, ajoutez "
 "ce shortcode à l'endroit où la liste des cookies doit apparaître :"
 
-#: lib/plugin.php:1892 lib/plugin.php:2258 lib/plugin.php:2285
-#: lib/plugin.php:2352 lib/plugin.php:2498
+#: lib/plugin.php:1911 lib/plugin.php:2281 lib/plugin.php:2308
+#: lib/plugin.php:2375 lib/plugin.php:2521
 msgid "Type"
 msgstr "Type"
 
-#: lib/plugin.php:1111 lib/plugin.php:1341
+#: lib/plugin.php:1125 lib/plugin.php:1356
 msgid "Unknown service"
 msgstr "Service inconnu"
 
-#: lib/plugin.php:2564
+#: lib/plugin.php:2591
 msgid ""
 "Use the wrapper shortcode around external embeds that may install cookies or "
 "load third-party resources."
@@ -1130,7 +1200,7 @@ msgstr ""
 "Utilisez le shortcode enveloppant autour des intégrations externes qui "
 "peuvent installer des cookies ou charger des ressources tierces."
 
-#: lib/plugin.php:2101
+#: lib/plugin.php:2124
 msgid ""
 "Use this value as the URL of any text link, button, or menu item. Clicking "
 "it will reopen the banner and cookie settings."
@@ -1138,7 +1208,7 @@ msgstr ""
 "Utilisez cette valeur comme URL d'un lien texte, d'un bouton ou d'un élément "
 "de menu. Un clic rouvrira la bannière et les réglages des cookies."
 
-#: lib/plugin.php:2247
+#: lib/plugin.php:2270
 msgid ""
 "Used internally to match detected external resources with this declared "
 "service. You can enter one or more domains separated by commas."
@@ -1157,15 +1227,15 @@ msgstr ""
 msgid "Valor incorrecto para la url %s"
 msgstr ""
 
-#: lib/plugin.php:2612
+#: lib/plugin.php:2639
 msgid "View"
 msgstr "Voir"
 
-#: lib/plugin.php:2195
+#: lib/plugin.php:2218
 msgid "View policy"
 msgstr "Voir la politique"
 
-#: lib/plugin.php:2385
+#: lib/plugin.php:2408
 msgid ""
 "When audit mode is enabled, administrators can browse the public website "
 "while logged in and this plugin records visible cookie names that are not "
@@ -1175,7 +1245,7 @@ msgstr ""
 "site public en étant connectés et cette extension enregistre les noms de "
 "cookies visibles qui ne sont pas encore déclarés."
 
-#: lib/plugin.php:2002
+#: lib/plugin.php:2021
 msgid ""
 "Wrap every video, map, iframe, or external embed that may install cookies. "
 "In Gutenberg, use the \"Consent-protected content\" block and place the "
@@ -1188,40 +1258,57 @@ msgstr ""
 "Gutenberg, placez manuellement les shortcodes d'ouverture et de fermeture du "
 "consentement autour du contenu intégré."
 
-#: lib/plugin.php:585
+#: lib/plugin.php:599
 msgid ""
 "Wrap videos, maps, iframes, and other external embeds that should load only "
 "after consent."
 msgstr ""
 
-#: lib/plugin.php:2066
-msgid ""
-"Write the banner text here. The cookie policy link is added automatically "
-"from the URL field below."
-msgstr ""
-"Rédigez ici le texte de la bannière. Le lien vers la politique de cookies "
-"est ajouté automatiquement à partir du champ URL ci-dessous.Rédigez ici le "
-"texte final de la bannière. Pour lier la politique de cookies, collez l'URL "
-"réelle dans le texte."
-
-#: lib/plugin.php:2670
+#: lib/plugin.php:2697
 msgid ""
 "You can accept, reject, or configure cookies from the banner shown when "
 "accessing the site. You can also delete or block cookies from your browser "
 "settings."
 msgstr ""
 
-#: lib/plugin.php:674 lib/plugin.php:1245
+#: lib/plugin.php:688 lib/plugin.php:1260
 msgid "You do not have permission to perform this action."
 msgstr ""
 
-#: lib/plugin.php:2009
+#: lib/plugin.php:2085
+msgid ""
+"You may include a link to the configured cookie policy URL anywhere in this "
+"text. If the text does not contain that link, the plugin will add it "
+"automatically at the end."
+msgstr ""
+"Vous pouvez insérer un lien vers l'URL configurée de la politique de cookies "
+"à n'importe quel endroit de ce texte. Si le texte ne contient pas ce lien, "
+"l'extension l'ajoutera automatiquement à la fin."
+
+#: lib/plugin.php:2028
 msgid "YouTube video"
 msgstr "Vidéo YouTube"
 
-#: lib/plugin.php:1767
+#: lib/plugin.php:1786
 msgid "close"
 msgstr "fermer"
+
+#~ msgid ""
+#~ "Loads fonts from Google servers without setting cookies. The request "
+#~ "transmits the visitor IP address and technical HTTP data to Google."
+#~ msgstr ""
+#~ "Charge les polices depuis les serveurs de Google sans installer de "
+#~ "cookies. La requête transmet à Google l'adresse IP du visiteur et des "
+#~ "données techniques HTTP."
+
+#~ msgid ""
+#~ "Write the banner text here. The cookie policy link is added automatically "
+#~ "from the URL field below."
+#~ msgstr ""
+#~ "Rédigez ici le texte de la bannière. Le lien vers la politique de cookies "
+#~ "est ajouté automatiquement à partir du champ URL ci-dessous.Rédigez ici "
+#~ "le texte final de la bannière. Pour lier la politique de cookies, collez "
+#~ "l'URL réelle dans le texte."
 
 #~ msgid ""
 #~ "The created page includes the shortcode [cdp_cookies_policy_table], which "

@@ -3,8 +3,8 @@ Contributors: cdoral
 Tags: cookie, cookies, rgpd, gdpr, consent
 Requires at least: 3.5
 Requires PHP: 7.2
-Tested up to: 7.0
-Stable tag: 1.0.45
+Tested up to: 7.0.1
+Stable tag: 1.0.46
 License: GPLv2 or later
 
 Gestiona el consentimiento de cookies con banner, inventario, scripts por categoría y embebidos protegidos.
@@ -21,17 +21,19 @@ Características del plugin:
 
 * Banner de cookies con aceptar todo, rechazar y configurar.
 * Textos del banner editables en español, inglés, francés y alemán.
-* Enlace a la política de cookies añadido automáticamente desde la URL configurada.
-* Inventario manual de cookies con biblioteca de servicios habituales.
+* Enlace a la política de cookies configurable: puede colocarse dentro del texto del banner y, si falta, se añade automáticamente al final.
+* Inventario manual de cookies con biblioteca de servicios habituales, incluidas cookies de WooCommerce y Wordfence.
 * Cookie técnica del propio plugin declarada automáticamente.
 * Categorías fijas: necesarias, analíticas, marketing y personalización.
 * Campos para cargar scripts sólo después del consentimiento correspondiente.
 * Shortcode y bloque Gutenberg para proteger vídeos, mapas, iframes y otros embebidos externos.
 * Escáner de embebidos para ayudar a localizar contenidos externos no protegidos.
 * Auditoría asistida para ayudar a detectar cookies visibles y recursos externos mientras un administrador navega por la web.
+* Reconocimiento de Google Fonts como servicio externo sin cookies, con recomendación de revisar su privacidad o alojar las fuentes localmente.
 * Creación automática de una página de política de cookies con tabla dinámica mediante shortcode.
 * Opción para colocar el menú en Herramientas o como menú principal del administrador.
 * Botón permanente de preferencias configurable como texto o icono.
+* Apertura de las preferencias desde cualquier enlace que apunte a #cdp-cookies-preferences.
 
 Importante: declarar cookies en el inventario documenta su uso, pero no las bloquea. Para bloquear cookies no necesarias hay que controlar los scripts y embebidos que las crean.
  
@@ -87,7 +89,27 @@ Permite que un administrador navegue por la web mientras el plugin registra cook
 
 El plugin utiliza categorías fijas: necesarias, analíticas, marketing y personalización. En los shortcodes se usan los valores técnicos necessary, analytics, marketing y personalization.
 
+= ¿Puedo colocar el enlace a la política dentro del texto del banner? =
+
+Sí. Configure primero la URL oficial de la política de cookies y utilice esa misma URL en un enlace HTML dentro del texto del banner. El plugin detectará el enlace y no añadirá otro al final. Si el texto no contiene la URL configurada, el enlace se añadirá automáticamente como alternativa.
+
+= ¿Por qué la auditoría muestra Google Fonts si no instala cookies? =
+
+Google Fonts no se añade al inventario como cookie. La auditoría lo identifica porque carga recursos desde dominios externos y esa conexión puede transmitir datos técnicos como la dirección IP. Debe revisar si ese uso encaja con su política de privacidad o alojar las fuentes localmente.
+
+= ¿La biblioteca incluye cookies de WooCommerce y Wordfence? =
+
+Sí. Incluye las principales cookies de WooCommerce y la cookie técnica de Wordfence utilizada para usuarios autenticados. Añada únicamente las entradas correspondientes a servicios y funciones que realmente utilice su web. La detección de una cookie de administración no implica que se instale a los visitantes anónimos.
+
 == Changelog ==
+
+= 1.0.46 =
+* Muestra la versión instalada en el encabezado del administrador.
+* Permite colocar manualmente el enlace a la política dentro del texto del banner sin duplicarlo al final.
+* Reconoce Google Fonts en la auditoría como servicio externo sin cookies y recomienda revisar su privacidad o alojar las fuentes localmente.
+* Añade a la biblioteca la cookie técnica de Wordfence para usuarios autenticados.
+* Añade a la biblioteca las principales cookies necesarias, de personalización y analíticas de WooCommerce.
+* Presenta aceptar, rechazar y configurar con la misma relevancia visual para evitar orientar la decisión del visitante.
 
 = 1.0.45 =
 * Permite editar los textos de los botones principales del banner en español, inglés, francés y alemán.
@@ -207,6 +229,9 @@ El plugin utiliza categorías fijas: necesarias, analíticas, marketing y person
 * Versión inicial.
 
 == Upgrade Notice ==
+
+= 1.0.46 =
+Mejora la colocación del enlace a la política, iguala visualmente las decisiones del banner y amplía la auditoría y la biblioteca de servicios.
 
 = 1.0.45 =
 Añade la edición multidioma de los botones, permite reabrir la configuración desde enlaces y mejora la visibilidad del shortcode del inventario.

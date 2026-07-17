@@ -50,6 +50,18 @@
 	justify-content: flex-end;
 }
 
+.cdp-cookies-banner__actions {
+	display: grid;
+	grid-template-columns: repeat(3, minmax(0, 1fr));
+	width: min(100%, 420px);
+}
+
+.cdp-cookies-banner__actions .cdp-cookies-button {
+	width: 100%;
+	min-height: 40px;
+	white-space: normal;
+}
+
 .cdp-cookies-button {
 	display: inline-flex;
 	align-items: center;
@@ -247,12 +259,22 @@
 		justify-content: stretch;
 	}
 
+	.cdp-cookies-banner__actions {
+		width: 100%;
+	}
+
 	.cdp-cookies-button {
 		flex: 1 1 auto;
 	}
 
 	.cdp-cookies-preferences--bottom {
 		left: var(--cdp-pref-x-mobile, 85%);
+	}
+}
+
+@media (max-width: 520px) {
+	.cdp-cookies-banner__actions {
+		grid-template-columns: 1fr;
 	}
 }
 
