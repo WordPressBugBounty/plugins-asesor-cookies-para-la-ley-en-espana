@@ -81,6 +81,7 @@ class cdp_cookies {
 			'en' => 'EN',
 			'fr' => 'FR',
 			'de' => 'DE',
+			'it' => 'IT',
 		);
 	}
 
@@ -98,6 +99,7 @@ class cdp_cookies {
 			'en' => 'We use our own and third-party cookies to ensure the website works properly, measure usage, and improve our services. You can accept all cookies, reject non-essential cookies, or configure your preferences.',
 			'fr' => 'Nous utilisons nos propres cookies et des cookies tiers pour assurer le bon fonctionnement du site, mesurer son utilisation et améliorer nos services. Vous pouvez accepter tous les cookies, refuser les cookies non essentiels ou configurer vos préférences.',
 			'de' => 'Wir verwenden eigene Cookies und Cookies von Drittanbietern, um den Betrieb der Website sicherzustellen, die Nutzung zu messen und unsere Dienste zu verbessern. Sie können alle Cookies akzeptieren, nicht notwendige Cookies ablehnen oder Ihre Präferenzen konfigurieren.',
+			'it' => 'Utilizziamo cookie propri e di terze parti per garantire il corretto funzionamento del sito, misurarne l\'utilizzo e migliorare i nostri servizi. Puoi accettare tutti i cookie, rifiutare quelli non necessari o configurare le tue preferenze.',
 		);
 
 		return $texts[ $language ];
@@ -126,6 +128,11 @@ class cdp_cookies {
 				'reject'     => 'Ablehnen',
 				'configure'  => 'Konfigurieren',
 			),
+			'it' => array(
+				'accept_all' => 'Accetta tutti',
+				'reject'     => 'Rifiuta',
+				'configure'  => 'Configura',
+			),
 		);
 
 		return $buttons[ $language ];
@@ -139,6 +146,7 @@ class cdp_cookies {
 			'en' => 'Cookie policy',
 			'fr' => 'Politique de cookies',
 			'de' => 'Cookie-Richtlinie',
+			'it' => 'Informativa sui cookie',
 		);
 
 		if ( ! $policy_url ) {
@@ -296,6 +304,12 @@ class cdp_cookies {
 				'marketing'       => 'Marketing',
 				'personalization' => 'Personalisierung',
 			),
+			'it' => array(
+				'necessary'       => 'Necessari',
+				'analytics'       => 'Analitici',
+				'marketing'       => 'Marketing',
+				'personalization' => 'Personalizzazione',
+			),
 		);
 
 		return $labels[ $language ] ?? $labels['en'];
@@ -327,6 +341,12 @@ class cdp_cookies {
 				'analytics'       => 'Helfen, die Nutzung der Website zu messen und Inhalte zu verbessern.',
 				'marketing'       => 'Ermöglichen Werbung, Kampagnenmessung oder Anzeigenpersonalisierung.',
 				'personalization' => 'Speichern Präferenzen oder ermöglichen nicht notwendige externe Inhalte.',
+			),
+			'it' => array(
+				'necessary'       => 'Necessari per il corretto funzionamento del sito. Non possono essere disattivati da questo pannello.',
+				'analytics'       => 'Aiutano a misurare l\'utilizzo del sito e a migliorarne i contenuti.',
+				'marketing'       => 'Consentono pubblicità, misurazione delle campagne o personalizzazione degli annunci.',
+				'personalization' => 'Memorizzano le preferenze o consentono contenuti esterni non necessari.',
 			),
 		);
 

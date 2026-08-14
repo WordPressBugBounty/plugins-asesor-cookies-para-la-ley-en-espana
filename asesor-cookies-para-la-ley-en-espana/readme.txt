@@ -4,7 +4,7 @@ Tags: cookie, cookies, rgpd, gdpr, consent
 Requires at least: 3.5
 Requires PHP: 7.2
 Tested up to: 7.0.1
-Stable tag: 1.0.46
+Stable tag: 1.0.47
 License: GPLv2 or later
 
 Gestiona el consentimiento de cookies con banner, inventario, scripts por categoría y embebidos protegidos.
@@ -20,7 +20,7 @@ El plugin no intenta adivinar ni bloquear automáticamente todos los elementos d
 Características del plugin:
 
 * Banner de cookies con aceptar todo, rechazar y configurar.
-* Textos del banner editables en español, inglés, francés y alemán.
+* Textos del banner editables en español, inglés, francés, alemán e italiano.
 * Enlace a la política de cookies configurable: puede colocarse dentro del texto del banner y, si falta, se añade automáticamente al final.
 * Inventario manual de cookies con biblioteca de servicios habituales, incluidas cookies de WooCommerce y Wordfence.
 * Cookie técnica del propio plugin declarada automáticamente.
@@ -102,6 +102,9 @@ Google Fonts no se añade al inventario como cookie. La auditoría lo identifica
 Sí. Incluye las principales cookies de WooCommerce y la cookie técnica de Wordfence utilizada para usuarios autenticados. Añada únicamente las entradas correspondientes a servicios y funciones que realmente utilice su web. La detección de una cookie de administración no implica que se instale a los visitantes anónimos.
 
 == Changelog ==
+
+= 1.0.47 =
+* Añade italiano a la interfaz del plugin, al banner, a sus botones y a las categorías de consentimiento.
 
 = 1.0.46 =
 * Muestra la versión instalada en el encabezado del administrador.
@@ -229,6 +232,9 @@ Sí. Incluye las principales cookies de WooCommerce y la cookie técnica de Word
 * Versión inicial.
 
 == Upgrade Notice ==
+
+= 1.0.47 =
+Añade compatibilidad completa con italiano en la administración y en el banner de consentimiento.
 
 = 1.0.46 =
 Mejora la colocación del enlace a la política, iguala visualmente las decisiones del banner y amplía la auditoría y la biblioteca de servicios.

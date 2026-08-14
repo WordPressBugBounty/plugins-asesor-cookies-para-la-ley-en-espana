@@ -3,6 +3,11 @@
 Plugin para gestionar el consentimiento de cookies en WordPress mediante banner,
 inventario, carga condicionada de scripts y protección de contenidos embebidos.
 
+## Versión 1.0.47
+
+- Añade italiano a la interfaz, al banner, a sus botones y a las categorías de
+  consentimiento.
+
 ## Versión 1.0.46
 
 - Muestra la versión instalada en el encabezado del administrador.
